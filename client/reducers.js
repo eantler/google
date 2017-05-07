@@ -7,7 +7,7 @@ import { combineReducers } from 'redux';
 import app from './modules/App/AppReducer';
 import posts from './modules/Post/PostReducer';
 import intl from './modules/Intl/IntlReducer';
-
+import dashboard from './modules/Dashboard/DashboardReducer'
 // Combine all reducers into one root reducer
 export default combineReducers({
   app,

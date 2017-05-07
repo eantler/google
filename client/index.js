@@ -7,14 +7,28 @@ import { AppContainer } from 'react-hot-loader';
 import App from './App';
 import { configureStore } from './store';
 
+//Material Ui
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import createStyleManager from '../config/palette';
+
+
 // Initialize store
 const store = configureStore(window.__INITIAL_STATE__);
 const mountApp = document.getElementById('root');
+const { styleManager, theme } = createStyleManager();
+
+const jssStyles = document.getElementById('jss-server-side');
+    if (jssStyles && jssStyles.parentNode) {
+      jssStyles.parentNode.removeChild(jssStyles);
+    }
 
 render(
-  <AppContainer>
-    <App store={store} />
-  </AppContainer>,
+  <MuiThemeProvider styleManager={styleManager} theme={theme}>
+    <AppContainer>
+      <App store={store} />
+    </AppContainer>
+  </MuiThemeProvider>,
   mountApp
 );
 
@@ -25,9 +39,11 @@ if (module.hot) {
     // use <App /> here rather than require() a <NextApp />.
     const NextApp = require('./App').default; // eslint-disable-line global-require
     render(
-      <AppContainer>
-        <NextApp store={store} />
-      </AppContainer>,
+      <MuiThemeProvider styleManager={styleManager} theme={theme}>
+        <AppContainer>
+          <NextApp store={store} />
+        </AppContainer>
+      </MuiThemeProvider>,
       mountApp
     );
   });

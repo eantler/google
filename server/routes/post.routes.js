@@ -7,6 +7,8 @@ router.route('/posts').get(PostController.getPosts);
 
 // Get one post by cuid
 router.route('/posts/:cuid').get(PostController.getPost);
+// Get one post by cuid
+router.route('/user').get(PostController.getUser);
 
 // Add a new Post
 router.route('/posts').post(PostController.addPost);

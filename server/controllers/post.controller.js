@@ -19,6 +19,22 @@ export function getPosts(req, res) {
 }
 
 /**
+ * Get user
+ * @param req
+ * @param res
+ * @returns void
+ */
+export function getUser(req, res) {
+    let user = req.user;
+    let isAuthenticated = req.isAuthenticated();
+    console.log('user api call performed');
+    res.json({
+      isAuthenticated: isAuthenticated,
+       user: user,
+    });
+}
+
+/**
  * Save a post
  * @param req
  * @param res

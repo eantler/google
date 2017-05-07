@@ -1,9 +1,11 @@
 import Express from 'express';
+import expressSessions from 'express-session';
 import compression from 'compression';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import path from 'path';
 import IntlWrapper from '../client/modules/Intl/IntlWrapper';
+import mongoConnect from 'connect-mongo'; // this is to connect session to store
 
 // Webpack Requirements
 import webpack from 'webpack';
@@ -36,6 +38,21 @@ import posts from './routes/post.routes';
 import dummyData from './dummyData';
 import serverConfig from './config';
 
+// Import Material Ui
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import createStyleManager from '../config/palette';
+
+// Import Passport
+import passport from 'passport';
+import cookieParser from 'cookie-parser';
+import passportGoogle from 'passport-google-oauth'
+import googleCredentials from '../config/google';
+import * as passportHandler from './passportHandle';
+let GoogleStrategy = passportGoogle.OAuth2Strategy;
+
+//set up styles
+const { styleManager, theme } = createStyleManager();
+const css = styleManager.sheetsToString();
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
 
@@ -50,15 +67,69 @@ mongoose.connect(serverConfig.mongoURL, (error) => {
   dummyData();
 });
 
+
+
+//set up google Authentication
+passport.use(new GoogleStrategy({
+    clientID: googleCredentials.GOOGLE_CLIENT_ID,
+    clientSecret: googleCredentials.GOOGLE_CLIENT_SECRET,
+    callbackURL: googleCredentials.callbackURL,
+
+  }, passportHandler.handleGoogleStrategy));
+
+// how to serialize user
+passport.serializeUser(passportHandler.serializeUser);
+passport.deserializeUser(passportHandler.deserializeUser);
+
+// configure mongo store
+const MongoStore = mongoConnect(expressSessions);
+// configure for passport
+app.use(Express.static(path.resolve(__dirname, '../dist')));
+//app.use(cookieParser()); - not needed in latest express-session
+app.use(
+    expressSessions(
+        {
+          secret: 'fdsadkfjhkadjfd_Dfd9sdsd342',
+          resave: true,
+          saveUninitialized: true,
+          cookie: {maxAge: 2592000000}, // one month
+          store: new MongoStore({ mongooseConnection: mongoose.connection }),
+        }
+      ));
+
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 // Apply body Parser and server public assets and routes
 app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
-app.use(Express.static(path.resolve(__dirname, '../dist')));
+
+
+
 app.use('/api', posts);
 
+// login with google
+ app.use('/auth/google/redirect',
+ passport.authenticate('google', { scope: ['email profile'] }));
+
+ app.use('/auth/google/callback',
+   passport.authenticate('google', { failureRedirect: '/auth/failed' }),
+   function(req, res) {
+     console.log('auth success');
+
+     res.redirect('/');
+   });
+//logout
+app.use('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 // Render Initial HTML
-const renderFullPage = (html, initialState) => {
+const renderFullPage = (html, css, initialState) => {
   const head = Helmet.rewind();
 
   // Import Manifests
@@ -88,6 +159,7 @@ const renderFullPage = (html, initialState) => {
           window.webpackManifest = ${JSON.stringify(chunkManifest)};
           //]]>` : ''}
         </script>
+        <style id="jss-server-side">${css}</style>
         <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/vendor.js'] : '/vendor.js'}'></script>
         <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/app.js'] : '/app.js'}'></script>
       </body>
@@ -103,8 +175,19 @@ const renderError = err => {
 };
 
 // Server Side Rendering based on routes matched by React-router.
-app.use((req, res, next) => {
+ app.use((req, res, next) => {
   match({ routes, location: req.url }, (err, redirectLocation, renderProps) => {
+
+    let user = req.user;
+    if (user === undefined) {
+      user = {};
+    } else {
+      user = req.user[0];
+    }
+
+    console.log (`isAuthenticated: ${JSON.stringify(user)}`);
+    console.log (`User: ${JSON.stringify(req.user)}`);
+
     if (err) {
       return res.status(500).end(renderError(err));
     }
@@ -117,23 +200,36 @@ app.use((req, res, next) => {
       return next();
     }
 
-    const store = configureStore();
+    const store = configureStore({
+      app : {
+        showAddPost: false,
+        isAuthenticated: false,
+        user: user,
+        tags: [{ key: 0 , label: 'test' }]
+      },
+    });
+
 
     return fetchComponentData(store, renderProps.components, renderProps.params)
       .then(() => {
         const initialView = renderToString(
-          <Provider store={store}>
-            <IntlWrapper>
-              <RouterContext {...renderProps} />
-            </IntlWrapper>
-          </Provider>
+          <MuiThemeProvider styleManager={styleManager} theme={theme}>
+            <Provider store={store}>
+              <IntlWrapper>
+                <RouterContext {...renderProps} />
+              </IntlWrapper>
+            </Provider>
+          </MuiThemeProvider>
         );
-        const finalState = store.getState();
+
+
+        const finalState = store.getState();;
+
 
         res
           .set('Content-Type', 'text/html')
           .status(200)
-          .end(renderFullPage(initialView, finalState));
+          .end(renderFullPage(initialView, css, finalState));
       })
       .catch((error) => next(error));
   });
@@ -142,7 +238,7 @@ app.use((req, res, next) => {
 // start app
 app.listen(serverConfig.port, (error) => {
   if (!error) {
-    console.log(`MERN is running on port: ${serverConfig.port}! Build something amazing!`); // eslint-disable-line
+    console.log(`server running on port: ${serverConfig.port}`); // eslint-disable-line
   }
 });
 
