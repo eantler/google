@@ -8,7 +8,6 @@ import Paper from 'material-ui/Paper';
 import SearchInput from './SearchInput';
 import Chips from './Chips';
 import SearchButton from './SearchButton';
-import Layout from 'material-ui/Layout';
 import { performAddTag, performRemovetag } from '../../AppActions';
 
 const styleSheet = createStyleSheet('PaperSheet', (theme) => ({
@@ -60,15 +59,17 @@ export class Search extends Component {
     const classes = this.styleManager.render(styleSheet);
 
     return (
-    <div className={classes.root}>
-    <Layout container gutter={24}>
-    <Layout item xs={12}>
-          <SearchInput text={this.state.inputText} onEnter={this.HandleEnterClick}/>
-          <Chips tags={this.props.tags} onDelete={this.HandleDelete}/>
-          <SearchButton/>
-    </Layout>
-    </Layout>
+      <div className='container'>
+        <div className='row'>
+            <div className='three columns'>
+              <div className={classes.root}>
+                <SearchInput text={this.state.inputText} onEnter={this.HandleEnterClick}/>
+                <Chips tags={this.props.tags} onDelete={this.HandleDelete}/>
+                <SearchButton/>
+              </div>
+            </div>
         </div>
+      </div>
       );
     }
 

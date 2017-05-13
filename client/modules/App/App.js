@@ -10,6 +10,8 @@ import DevTools from './components/DevTools';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import ButtonAppBar from './components/ButtonAppBar/ButtonAppBar';
+import Search from './components/Search/Search';
+
 // Import Actions
 import { toggleAddPost, fetchCurrentUser } from './AppActions';
 import { switchLanguage } from '../../modules/Intl/IntlActions';
@@ -58,7 +60,7 @@ export class App extends Component {
           <ButtonAppBar isAuthenticated={this.props.isAuthenticated} user={this.props.user} dispatch={this.props.dispatch}/>
 
           <div className={styles.container}>
-
+            <Search />
             {this.props.children}
           </div>
           <Footer />
