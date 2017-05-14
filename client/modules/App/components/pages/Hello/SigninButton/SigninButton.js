@@ -20,7 +20,6 @@ const iconStyleSheet = createStyleSheet('Icons', () => ({
 const styleSheet = createStyleSheet('RaisedButtons', (theme) => ({
   button: {
     margin: 'auto',
-    display: 'block',
     color: '#FFFFFF',
   },
 }));

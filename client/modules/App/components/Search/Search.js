@@ -8,7 +8,21 @@ import Paper from 'material-ui/Paper';
 import SearchInput from './SearchInput';
 import Chips from './Chips';
 import SearchButton from './SearchButton';
-import { performAddTag, performRemovetag } from '../../AppActions';
+import { clickSearch, performAddTag, performRemovetag } from '../../AppActions';
+import { CircularProgress } from 'material-ui/Progress';
+import Grid from 'material-ui/Grid';
+
+const gridStyleSheet = createStyleSheet('CenteredGrid', (theme) => ({
+  root: {
+    flexGrow: 1,
+    marginTop: 30,
+  },
+  paper: {
+    padding: 16,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 
 const styleSheet = createStyleSheet('PaperSheet', (theme) => ({
   root: theme.mixins.gutters({
@@ -21,6 +35,9 @@ const styleSheet = createStyleSheet('PaperSheet', (theme) => ({
     //flexWrap: 'nowrap',
     alignItems: 'center',
   }),
+    progress: {
+    margin: `0 ${theme.spacing.unit * 2}px`,
+  },
 }));
 function handleChange(chips) {
     alert(JSON.stringify(chips));
@@ -40,6 +57,7 @@ export class Search extends Component {
       this.performAddTag = performAddTag.bind(this);
       this.performRemovetag = performRemovetag.bind(this);
       this.HandleDelete = this.HandleDelete.bind(this);
+      this.HandleSearch = this.HandleSearch.bind(this);
   }
 
     componentDidMount() {
@@ -55,20 +73,26 @@ export class Search extends Component {
       this.props.dispatch(performRemovetag(id));
     }
 
+    HandleSearch() {
+      this.props.dispatch(clickSearch());
+    }
   render() {
     const classes = this.styleManager.render(styleSheet);
+    const gridClasses = this.styleManager.render(gridStyleSheet);
 
     return (
-      <div className='container'>
-        <div className='row'>
-            <div className='three columns'>
-              <div className={classes.root}>
+      <div className={gridClasses.root}>
+         <Grid container gutter={24}>
+            <Grid item xs={12}>
                 <SearchInput text={this.state.inputText} onEnter={this.HandleEnterClick}/>
-                <Chips tags={this.props.tags} onDelete={this.HandleDelete}/>
-                <SearchButton/>
-              </div>
-            </div>
-        </div>
+            </Grid>
+            <Grid item xs={12}>
+               <Chips tags={this.props.tags} onDelete={this.HandleDelete}/>
+            </Grid>
+            <Grid item xs={12}>
+            <SearchButton onClick={this.HandleSearch} showLoader={this.props.showLoader}/> 
+            </Grid>
+        </Grid>
       </div>
       );
     }
@@ -86,6 +110,7 @@ export class Search extends Component {
 function mapStateToProps(store) {
       return {
         tags: store.app.tags,
+        showLoader: store.app.showLoader,
       };
   }
 
@@ -94,3 +119,23 @@ Search.contextTypes = {
 };
 
 export default connect(mapStateToProps)(Search);
+
+
+
+      /*<div className='container top-margin-small'>
+        <div className='row'>
+            <div className='three columns'>
+                <SearchInput text={this.state.inputText} onEnter={this.HandleEnterClick}/>
+            </div>
+        <div className='row'>
+            <div className='three columns'>
+            </div>
+        </div> 
+        <div className='row'>
+            <div className='three columns'>
+              <Chips tags={this.props.tags} onDelete={this.HandleDelete}/>
+            </div>
+        </div> 
+               <SearchButton onClick={this.HandleSearch} showLoader={this.props.showLoader}/> 
+        </div>
+      </div>*/

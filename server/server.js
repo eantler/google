@@ -137,7 +137,7 @@ const renderFullPage = (html, css, initialState) => {
   const chunkManifest = process.env.webpackChunkAssets && JSON.parse(process.env.webpackChunkAssets);
 
   return `
-    <!doctype html>
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html>
       <head>
         ${head.base.toString()}
@@ -205,7 +205,9 @@ const renderError = err => {
         showAddPost: false,
         isAuthenticated: false,
         user: user,
-        tags: [{ key: 0 , label: 'test' }]
+        showLoader: false,
+        searchResults: [],
+        tags: [],
       },
     });
 

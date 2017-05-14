@@ -10,7 +10,6 @@ import FormControl from 'material-ui/Form/FormControl';
 const styleSheet = createStyleSheet('ComposedTextField', () => ({
   container: {
 
-    display: 'block',
     width: '100%',
 
 

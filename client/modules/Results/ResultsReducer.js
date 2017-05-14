@@ -1,9 +1,9 @@
-import { TOGGLE_LOGIN } from './DashboardActions';
+import { TOGGLE_LOGIN } from './ResultsActions';
 
 // Initial State
 const initialState = { data: [] };
 
-const PostReducer = (state = initialState, action) => {
+const ResultsReducer = (state = initialState, action) => {
   switch (action.type) {
 
     default:
@@ -15,4 +15,4 @@ const PostReducer = (state = initialState, action) => {
 
 
 // Export Reducer
-export default PostReducer;
+export default ResultsReducer;

@@ -10,6 +10,7 @@ if (typeof require.ensure !== 'function') {
   };
 }
 
+//import { browserHistory } from 'react-router'
 /* Workaround for async react routes to work with react-hot-reloader till
   https://github.com/reactjs/react-router/issues/2182 and
   https://github.com/gaearon/react-hot-loader/issues/288 is fixed.
@@ -18,6 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
   // Require async routes only in development for react-hot-reloader to work.
   //require('./modules/App/components/pages/Hello/Hello');
   require('./modules/App/components/Search/Search');
+  require('./modules/Results/Results');
 }
 
 // <IndexRoute
@@ -39,6 +41,15 @@ export default  (
       });
     }}
   />
+    <Route
+    path="/results"
+    getComponent={(nextState, cb) => {
+      require.ensure([], require => {
+        cb(null, require('./modules/Results/Results').default);
+      });
+    }}
+  />
+  
   </Route>
 );
 // <Route
