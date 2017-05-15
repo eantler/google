@@ -1,6 +1,7 @@
 import callApi from '../../util/apiCaller';
 import loginApi from '../../util/loginApi';
 import { browserHistory } from 'react-router';
+import cuid from 'cuid';
 
 // Export Constants
 export const TOGGLE_ADD_POST = 'TOGGLE_ADD_POST';
@@ -14,6 +15,7 @@ export const SEARCH_DONE = 'SEARCH_DONE';
 
 const defaultResults = [
           {
+            uniqueID: cuid(),
             name: 'Babies and fruits',
             memes: [
               'http://s2.quickmeme.com/img/51/516fbac7acc1f675ba4c3222eba9c6535835a3aed60c0960bb49166f0b1984dd.jpg'
@@ -23,6 +25,7 @@ const defaultResults = [
             ]
           },
           {
+            uniqueID: cuid(),
             name: 'Babies and cakes',
             memes: [
               'https://s-media-cache-ak0.pinimg.com/736x/f6/ba/ef/f6baefaeba0a1a28aebe40876dac37c4.jpg'
@@ -32,6 +35,7 @@ const defaultResults = [
             ]
           },
           {
+            uniqueID: cuid(),
             name: 'Kids and food',
             memes: [
               'http://mommyshorts.com/wp-content/uploads/2014/09/6a0133f30ae399970b01b8d0689f9d970c-800wi.jpg'
@@ -41,6 +45,7 @@ const defaultResults = [
             ]
           },
           {
+            uniqueID: cuid(),
             name: 'Mothers and food',
             memes: [
               'https://s-media-cache-ak0.pinimg.com/736x/20/3e/b9/203eb9ddb040d619d34f85c46202563f.jpg'
@@ -64,7 +69,7 @@ export function startSearch() {
 }
 
 export function endSearch(results) {
-  browserHistory.push('/results');
+  // browserHistory.push('/results');
   return {
       type: SEARCH_DONE,
       results

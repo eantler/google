@@ -34,21 +34,14 @@ if (process.env.NODE_ENV !== 'production') {
 // More info: http://blog.mxstbr.com/2016/01/react-apps-with-pages/
 export default  (
   <Route path="/" component={App} >
-  <IndexRoute
-    getComponent={(nextState, cb) => {
-      require.ensure([], require => {
-        cb(null, require('./modules/App/components/Search/Search').default);
-      });
-    }}
-  />
-    <Route
-    path="/results"
-    getComponent={(nextState, cb) => {
-      require.ensure([], require => {
-        cb(null, require('./modules/Results/Results').default);
-      });
-    }}
-  />
+    <IndexRoute
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Results/Results').default);
+        });
+      }}
+    />
+
   
   </Route>
 );
@@ -60,3 +53,12 @@ export default  (
 //     });
 //   }}
 // />
+
+    /*<Route
+    path="/results"
+    getComponent={(nextState, cb) => {
+      require.ensure([], require => {
+        cb(null, require('./modules/Results/Results').default);
+      });
+    }}
+  />*/

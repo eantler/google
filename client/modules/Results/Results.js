@@ -52,12 +52,12 @@ export class Results extends Component {
       <div>
         {
           this.props.results.map((item,i) => {
-            return (<div className="row" key={i}>              
+            return (
+            <div className="row" key={item.uniqueID}>              
               <div className='three columns'>
-                 
                   <div className='flexi'>
                     <Card className={clusterClasses.wideCard}>   
-                      <ClusterItem title={item.name} photos={item.memes} classes={clusterClasses}/>
+                      <ClusterItem title={item.name} photos={item.memes} classes={clusterClasses} fatherKey={item.uniqueID}/>
                     </Card>
                   </div>
               </div>

@@ -14,8 +14,8 @@ export default function ClusterItem (props) {
 
    let response = props.photos.map((photo,i) => {
                 return ( 
-                   <div className={props.classes.inliner} id={i}>
-                     <Card className={props.classes.card}>    
+                   <div className={props.classes.inliner} key={String.prototype.concat(props.fatherKey,i.toString())}>
+                     <Card className={props.classes.card} >    
                        <CardMedia>
                          <img src={photo} className={props.classes.photo}/>
                        </CardMedia>
@@ -31,6 +31,7 @@ ClusterItem.propTypes = {
   title: PropTypes.string.isRequired,
   photos: PropTypes.array.isRequired,
   classes: PropTypes.object.isRequired,
+  fatherKey: PropTypes.string.isRequired,
 };
 
 
