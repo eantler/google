@@ -8,14 +8,17 @@ import Typography from 'material-ui/Typography';
 import Divider from 'material-ui/Divider';
 import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
+import Card, { CardActions, CardContent, CardMedia, CardHeader } from 'material-ui/Card';
+import Grid from 'material-ui/Grid';
 
 // Import Actions
+
+
+//Create StyleSheets
 
 const styleSheet = createStyleSheet('SimpleMediaCard', () => ({
   wideCard: {
     width: '100%',
-    margin: '20px',
     alignItems: 'center',
   },
   card: {
@@ -36,6 +39,18 @@ const styleSheet = createStyleSheet('SimpleMediaCard', () => ({
   }
 }));
 
+const gridStyleSheet = createStyleSheet('FullWidthGrid', (theme) => ({
+  root: {
+    flexGrow: 1,
+    marginTop: 30,
+  },
+  paper: {
+    padding: 16,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
+
 
 export class Results extends Component {
 
@@ -48,23 +63,27 @@ export class Results extends Component {
 
   render() {
     let clusterClasses = this.styleManager.render(styleSheet);
-    return (
-      <div>
-        {
-          this.props.results.map((item,i) => {
-            return (
-            <div className="row" key={item.uniqueID}>              
-              <div className='three columns'>
-                  <div className='flexi'>
-                    <Card className={clusterClasses.wideCard}>   
-                      <ClusterItem title={item.name} photos={item.memes} classes={clusterClasses} fatherKey={item.uniqueID}/>
-                    </Card>
-                  </div>
-              </div>
-            </div>)
+    let gridClasses = this.styleManager.render(gridStyleSheet);
 
-        })
-      }
+    return (
+      <div className={gridClasses.root}>
+        <Grid container gutter={24} justify='center'>
+          {
+            this.props.results.map((item,i) => {
+              return (
+                <Grid item xs={11}>
+                      <Card className={clusterClasses.wideCard}>   
+                        <CardHeader title={item.name}/>
+                        <CardContent>
+                            <ClusterItem photos={item.memes} classes={clusterClasses} fatherKey={item.uniqueID}/>
+                        </CardContent>
+                      </Card>
+                </Grid>
+               )
+
+          })
+        }
+      </Grid>
     </div>
     ) 
 }

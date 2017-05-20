@@ -59,10 +59,9 @@ export class App extends Component {
           />
           <ButtonAppBar isAuthenticated={this.props.isAuthenticated} user={this.props.user} dispatch={this.props.dispatch}/>
 
-          <div className={styles.container}>
+     
             <Search />
             {this.props.children}
-          </div>
           <Footer />
       </div>
     );

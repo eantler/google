@@ -28,7 +28,6 @@ export default function ClusterItem (props) {
 
 
 ClusterItem.propTypes = {
-  title: PropTypes.string.isRequired,
   photos: PropTypes.array.isRequired,
   classes: PropTypes.object.isRequired,
   fatherKey: PropTypes.string.isRequired,

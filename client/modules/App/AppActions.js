@@ -16,7 +16,7 @@ export const SEARCH_DONE = 'SEARCH_DONE';
 const defaultResults = [
           {
             uniqueID: cuid(),
-            name: 'Babies and fruits',
+            name: 'Babies, Fruits',
             memes: [
               'http://s2.quickmeme.com/img/51/516fbac7acc1f675ba4c3222eba9c6535835a3aed60c0960bb49166f0b1984dd.jpg'
               ,'https://cdn.meme.am/cache/instances/folder438/500x/53576438.jpg'
@@ -26,7 +26,7 @@ const defaultResults = [
           },
           {
             uniqueID: cuid(),
-            name: 'Babies and cakes',
+            name: 'Babies, Cakes',
             memes: [
               'https://s-media-cache-ak0.pinimg.com/736x/f6/ba/ef/f6baefaeba0a1a28aebe40876dac37c4.jpg'
               ,'http://www.quickmeme.com/img/18/18b384585e013aa63ea6fc32f344c1417cca02903653621f22711192e16ad8d6.jpg'
@@ -36,7 +36,7 @@ const defaultResults = [
           },
           {
             uniqueID: cuid(),
-            name: 'Kids and food',
+            name: 'Kids, Food',
             memes: [
               'http://mommyshorts.com/wp-content/uploads/2014/09/6a0133f30ae399970b01b8d0689f9d970c-800wi.jpg'
               ,'http://m.memegen.com/t8ot6h.jpg'
@@ -46,7 +46,7 @@ const defaultResults = [
           },
           {
             uniqueID: cuid(),
-            name: 'Mothers and food',
+            name: 'Mothers, Food',
             memes: [
               'https://s-media-cache-ak0.pinimg.com/736x/20/3e/b9/203eb9ddb040d619d34f85c46202563f.jpg'
               ,'https://static.plive.co.ke/img/incoming/origs6512796/4926367665-w644-h960/16.jpg'
