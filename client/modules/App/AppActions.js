@@ -16,13 +16,13 @@ export const SEARCH_DONE = 'SEARCH_DONE';
 const defaultResults = [
           {
             uniqueID: cuid(),
-            name: 'Kid, Food',
+            name: 'Kid, Apple',
             memes: [
-              'http://mommyshorts.com/wp-content/uploads/2014/09/6a0133f30ae399970b01b8d0689f9d970c-800wi.jpg'
-              ,'http://images5.aplus.com/uc-up/ba24a3b8-fc7e-40e6-9d37-379b5471fb47/6a0133f30ae399970b01a73e08e2cf970d800wi.resize_640x.jpg'
-              ,'http://m.memegen.com/t8ot6h.jpg'
-              ,'https://img.memesuper.com/69b29cce38f32a64874db8b8eca6d3fc_-kid-meme-eating-food-meme-eating-food_400-400.jpeg'
-              ,'https://i.imgflip.com/n3hlr.jpg'
+              'http://weknowmemes.com/wp-content/uploads/2012/05/itouch-kids-meme.jpg'
+              ,'https://cdn.meme.am/cache/instances/folder877/65774877.jpg'
+              ,'https://cdn.meme.am/cache/instances/folder965/43160965.jpg'
+              ,'https://i.imgflip.com/g9k53.jpg'
+              ,'https://img.memecdn.com/introducing-spoiled-kid-kyle_o_1893227.jpg'
             ]
           },
           {
@@ -38,6 +38,17 @@ const defaultResults = [
           },
           {
             uniqueID: cuid(),
+            name: 'Kid, Food',
+            memes: [
+              'http://mommyshorts.com/wp-content/uploads/2014/09/6a0133f30ae399970b01b8d0689f9d970c-800wi.jpg'
+              ,'http://images5.aplus.com/uc-up/ba24a3b8-fc7e-40e6-9d37-379b5471fb47/6a0133f30ae399970b01a73e08e2cf970d800wi.resize_640x.jpg'
+              ,'http://m.memegen.com/t8ot6h.jpg'
+              ,'https://img.memesuper.com/69b29cce38f32a64874db8b8eca6d3fc_-kid-meme-eating-food-meme-eating-food_400-400.jpeg'
+              ,'https://i.imgflip.com/n3hlr.jpg'
+            ]
+          },
+          {
+            uniqueID: cuid(),
             name: 'Baby, Cake',
             memes: [
               'https://s-media-cache-ak0.pinimg.com/736x/f6/ba/ef/f6baefaeba0a1a28aebe40876dac37c4.jpg'
@@ -45,17 +56,6 @@ const defaultResults = [
               ,'https://img.memecdn.com/baby-food_o_993584.jpg'
               ,'https://img.memecdn.com/chocolate-cake_o_218856.jpg'
               ,'https://i.imgflip.com/11fx2t.jpg'
-            ]
-          },
-          {
-            uniqueID: cuid(),
-            name: 'Mother, Junk Food',
-            memes: [
-              'https://s-media-cache-ak0.pinimg.com/736x/20/3e/b9/203eb9ddb040d619d34f85c46202563f.jpg'
-              ,'https://static.plive.co.ke/img/incoming/origs6512796/4926367665-w644-h960/16.jpg'
-              ,'http://memeguy.com/photos/images/i-call-her-confession-mom-38941.png'
-              ,'http://cdn.ohmygodfacts.com/wp-content/uploads/2015/02/moms-logic-1.jpg'
-              ,'https://pics.onsizzle.com/iwouldneverpoisonimy-children-with-junk-food-that-seemslike-an-inefficient-way-2696713.png'
             ]
           },
         ];
