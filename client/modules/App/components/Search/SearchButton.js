@@ -22,10 +22,9 @@ const styleSheet = createStyleSheet('RaisedButtons', (theme) => ({
   button: {
     margin: theme.spacing.unit,
     color: 'rgb(255, 255, 255)',
-    width: '150px',
-    fontSize: '16px',
     alignSelf: 'center',
     display: 'inline-block',
+    fontSize: '25px',
   }
 }));
 

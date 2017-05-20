@@ -17,6 +17,7 @@ const styleSheet = createStyleSheet('ComposedTextField', () => ({
   input: {
     margin: 10,
     textAlign:'center',
+    fontSize: '25px',
 
   },
   inputText: {

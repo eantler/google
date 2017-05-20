@@ -36,14 +36,18 @@ const styleSheet = createStyleSheet('SimpleMediaCard', () => ({
   inliner: {
     display: 'inline-block',
     justifyItems: 'center',
+    alignItems: 'space-between',
   },
   wideCenter: {
-    width: '100%',
-    alignItems: 'center',
-    justifyItems: 'center',
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   cardActions: {
     justifyItems: 'right',
+    fontSize: '25px',
+  },
+  actionButton: {
+    fontSize: '25px',
   },
 }));
 
@@ -57,12 +61,16 @@ const gridStyleSheet = createStyleSheet('FullWidthGrid', (theme) => ({
     color: theme.palette.text.secondary,
   },
   cardHeader: {
-    padding: '5px 0px 0px 16px',
+    padding: '5px 16px 0px 16px',
+    fontSize: '40px',
   },
   cardContent: {
-    padding: '5px 0px 0px 16px',
+    padding: '5px 16px 0px 16px',
+    justifyContent: 'space-between',
     justifyItems: 'center',
-  }
+  },
+
+
 }));
 
 
@@ -92,7 +100,7 @@ export class Results extends Component {
                             <ClusterItem photos={item.memes} classes={clusterClasses} fatherKey={item.uniqueID}/>
                         </CardContent>
                         <CardActions className={clusterClasses.cardActions}>
-                            <Button compact>More<Forward/></Button>
+                            <Button className={clusterClasses.actionButton}>More<Forward/></Button>
                         </CardActions>
                       </Card>
                 </Grid>

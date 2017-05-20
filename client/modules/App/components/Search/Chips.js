@@ -21,7 +21,7 @@ const styleSheet = createStyleSheet('ChipsArray', (theme) => ({
     margin: '10px 10px 0px 0px',
   },
   chipLabel: {
-    fontSize: '20px',
+    fontSize: '25px',
   }
 }));
 
@@ -73,7 +73,7 @@ export class Chips extends Component {
 
     return (
       <div className={classes.row}>
-        <Typography type="title" className={classes.preText} >
+        <Typography type="headline" className={classes.preText} >
             Inserted Tags:
         </Typography>
        {this.props.displayTags.map(renderChip, this)}

@@ -24,13 +24,13 @@ const styleSheet = createStyleSheet('ButtonAppBar', () => ({
   },
   flex: {
     flex: 1,
-    fontSize: '25px',
+    fontSize: '35px',
     color: 'rgb(255,255,255)',
   },
   extraButton: {
     margin: '0px 10px 0px 10px',
-    padding: '10px',
-    fontSize: '12px',
+//    padding: '10px',
+    fontSize: '25px',
   }
 }));
 
