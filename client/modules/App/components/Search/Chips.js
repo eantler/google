@@ -5,17 +5,24 @@ import { connect } from 'react-redux';
 import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import Chip from 'material-ui/Chip';
+import Typography from 'material-ui/Typography';
 
 const styleSheet = createStyleSheet('ChipsArray', (theme) => ({
   chip: {
     margin: theme.spacing.unit / 2,
   },
   row: {
-    marginTop: '10px',
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'left',
+    alignContent: 'center',
     flexWrap: 'wrap',
   },
+  preText: {
+    margin: '10px 10px 0px 0px',
+  },
+  chipLabel: {
+    fontSize: '25px',
+  }
 }));
 
 export class Chips extends Component {
@@ -36,7 +43,6 @@ export class Chips extends Component {
 
   styles = {
     chip: {
-      margin: 4,
     },
     wrapper: {
       display: 'flex',
@@ -60,13 +66,17 @@ export class Chips extends Component {
           key={data.key}
           onRequestDelete={() => this.handleRequestDelete(data.key)}
           className={classes.chip}
+          labelClassName={classes.chipLabel}
         />
       );
     };
 
     return (
       <div className={classes.row}>
-        {this.props.displayTags.map(renderChip, this)}
+        <Typography type="headline" className={classes.preText} >
+            Inserted Tags:
+        </Typography>
+       {this.props.displayTags.map(renderChip, this)}
       </div>
     );
   }

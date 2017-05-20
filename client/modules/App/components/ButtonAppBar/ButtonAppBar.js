@@ -24,22 +24,16 @@ const styleSheet = createStyleSheet('ButtonAppBar', () => ({
   },
   flex: {
     flex: 1,
-    font: '200dp',
+    fontSize: '35px',
     color: 'rgb(255,255,255)',
   },
+  extraButton: {
+    margin: '0px 10px 0px 10px',
+//    padding: '10px',
+    fontSize: '25px',
+  }
 }));
 
-function logButton(props) {
-  if (this.props.isAuthenticated) {
-    return (
-      <Button onClick={dispatch(makeLoginWithGoogle())}>Login</Button>
-    )
-  } else {
-  return (
-    <Button>Logout</Button>
-  )}
-
-}
 
 export default function ButtonAppBar(props, context) {
   const classes = context.styleManager.render(styleSheet);
@@ -50,9 +44,9 @@ export default function ButtonAppBar(props, context) {
           <IconButton >
             <ToysIcon className={classes.flex}>add_circle</ToysIcon>
           </IconButton>
-          <Text type="title" className={classes.flex}>Semsim Memes</Text>
-          <logButton/>
-
+          <Text type="title" className={classes.flex}>SimMeme</Text>
+          <Button raised className={classes.extraButton}>Random Meme</Button>
+          <Button raised className={classes.extraButton}>Compose meme</Button>
         </Toolbar>
       </AppBar>
     </div>

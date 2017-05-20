@@ -10,13 +10,14 @@ import FormControl from 'material-ui/Form/FormControl';
 const styleSheet = createStyleSheet('ComposedTextField', () => ({
   container: {
 
-    width: '100%',
+    width: '50%',
 
 
   },
   input: {
     margin: 10,
     textAlign:'center',
+    fontSize: '25px',
 
   },
   inputText: {
@@ -61,7 +62,7 @@ export default class SearchInput extends Component {
     const classes = this.context.styleManager.render(styleSheet);
 
     return (
-      <div className={classes.container}>
+
         <FormControl className={classes.input}>
           <InputLabel htmlFor="name">
             Enter tag and press enter
@@ -72,9 +73,8 @@ export default class SearchInput extends Component {
             onChange={(event) => this.setState({ text: event.target.value })}
             onKeyPress={this.handleKeyPress}
             className={classes.inputText}
-          />
+          ></Input>
         </FormControl>
-      </div>
     );
   }
 }

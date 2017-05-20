@@ -3,18 +3,43 @@ import { connect } from 'react-redux';
 
 // Import Style
 import styles from './App.css';
+import { createStyleSheet } from 'jss-theme-reactor';;
 
 // Import Components
 import Helmet from 'react-helmet';
+import customPropTypes from 'material-ui/utils/customPropTypes';
 import DevTools from './components/DevTools';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import ButtonAppBar from './components/ButtonAppBar/ButtonAppBar';
 import Search from './components/Search/Search';
+import Paper from 'material-ui/Paper';
+import Grid from 'material-ui/Grid';
 
 // Import Actions
 import { toggleAddPost, fetchCurrentUser } from './AppActions';
 import { switchLanguage } from '../../modules/Intl/IntlActions';
+
+// Creating style sheet
+const styleSheet = createStyleSheet('InteractiveGrid', () => {
+  return {
+    root: {
+      flexGrow: 1,
+      marginTop: '30px',
+    },
+    demo: {
+      height: 240,
+    },
+    paper: {
+      padding: 12,
+      height: '100%',
+    },
+    control: {
+      padding: 12,
+    },
+  };
+});
+
 
 
 export class App extends Component {
@@ -23,6 +48,7 @@ export class App extends Component {
     this.state = { isMounted: false,
                    isAuthenticated: false,
                    user: undefined};
+    this.styleManager = context.styleManager;
 
   }
 
@@ -39,12 +65,14 @@ export class App extends Component {
 
 
   render() {
+      let classes = this.styleManager.render(styleSheet);
+
     return (
       <div >
         {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
           <Helmet
-            title="Semsim Memes"
-            titleTemplate="%s - Semsim Memes"
+            title="Sim Memes"
+            titleTemplate="%s - Sim Memes"
             meta={[
               { charset: 'utf-8' },
               {
@@ -58,15 +86,21 @@ export class App extends Component {
             ]}
           />
           <ButtonAppBar isAuthenticated={this.props.isAuthenticated} user={this.props.user} dispatch={this.props.dispatch}/>
-
-     
-            <Search />
+          <Grid container className={classes.root} justify='center' gutter={24}>
+            <Grid item xs={10}>
+              <Search />
+            </Grid>
+          </Grid>
             {this.props.children}
           <Footer />
       </div>
     );
   }
 }
+
+App.contextTypes = {
+  styleManager: customPropTypes.muiRequired,
+};
 
 App.propTypes = {
   children: PropTypes.object.isRequired,
