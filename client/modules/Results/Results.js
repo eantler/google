@@ -32,6 +32,7 @@ const styleSheet = createStyleSheet('SimpleMediaCard', () => ({
   },
   inliner: {
     display: 'inline-block',
+    justifyItems: 'center',
   },
   wideCenter: {
     width: '100%',
@@ -42,13 +43,19 @@ const styleSheet = createStyleSheet('SimpleMediaCard', () => ({
 const gridStyleSheet = createStyleSheet('FullWidthGrid', (theme) => ({
   root: {
     flexGrow: 1,
-    marginTop: 30,
   },
   paper: {
     padding: 16,
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+  cardHeader: {
+    padding: '5px 0px 0px 16px',
+  },
+  cardContent: {
+    padding: '5px 0px 16px 16px',
+    justifyItems: 'center',
+  }
 }));
 
 
@@ -71,10 +78,10 @@ export class Results extends Component {
           {
             this.props.results.map((item,i) => {
               return (
-                <Grid item xs={11}>
+                <Grid item xs={11} key={item.uniqueID}>
                       <Card className={clusterClasses.wideCard}>   
-                        <CardHeader title={item.name}/>
-                        <CardContent>
+                        <CardHeader title={item.name} className={gridClasses.cardHeader}/>
+                        <CardContent className={gridClasses.cardContent}>
                             <ClusterItem photos={item.memes} classes={clusterClasses} fatherKey={item.uniqueID}/>
                         </CardContent>
                       </Card>

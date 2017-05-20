@@ -41,18 +41,9 @@ export default class RaisedButtons extends Component {
   const gridClasses = this.styleManager.render(gridStyleSheet);
 
   return (
-    <div className={gridClasses.root}>
-    <Grid container gutter={24}>
-      <Grid item xs={12}>
-        <Paper className={gridClasses.paper} elevation={0}>
+    <div>
             <Button raised primary className={classes.button} onClick={() => {this.props.onClick()}}>Search</Button>
             <Button raised accent className={classes.button}>Advanced</Button>
-        </Paper>
-      </Grid>
-   
-  
-
-    </Grid>
     </div>
   );
   }

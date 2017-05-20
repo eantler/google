@@ -15,7 +15,7 @@ import Grid from 'material-ui/Grid';
 const gridStyleSheet = createStyleSheet('CenteredGrid', (theme) => ({
   root: {
     flexGrow: 1,
-    marginTop: 30,
+    marginTop: 60,
   },
   paper: {
     padding: 16,
@@ -82,16 +82,17 @@ export class Search extends Component {
 
     return (
       <div className={gridClasses.root}>
-         <Grid container gutter={24}>
-            <Grid item xs={12}>
-                <SearchInput text={this.state.inputText} onEnter={this.HandleEnterClick}/>
+         <Grid container direction='row' gutter={8}>
+            <Grid item xs={8}>
+                <SearchInput text={this.state.inputText} onEnter={this.HandleEnterClick} chips={<Chips tags={this.props.tags} onDelete={this.HandleDelete}/>}/>             
+            </Grid>
+            <Grid item xs={4}>
+              <SearchButton onClick={this.HandleSearch} showLoader={this.props.showLoader}/> 
             </Grid>
             <Grid item xs={12}>
                <Chips tags={this.props.tags} onDelete={this.HandleDelete}/>
             </Grid>
-            <Grid item xs={12}>
-            <SearchButton onClick={this.HandleSearch} showLoader={this.props.showLoader}/> 
-            </Grid>
+
         </Grid>
       </div>
       );
