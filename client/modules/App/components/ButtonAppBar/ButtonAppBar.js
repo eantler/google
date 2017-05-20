@@ -24,9 +24,14 @@ const styleSheet = createStyleSheet('ButtonAppBar', () => ({
   },
   flex: {
     flex: 1,
-    font: '200dp',
+    fontSize: '25px',
     color: 'rgb(255,255,255)',
   },
+  extraButton: {
+    margin: '0px 10px 0px 10px',
+    padding: '10px',
+    fontSize: '12px',
+  }
 }));
 
 
@@ -40,8 +45,8 @@ export default function ButtonAppBar(props, context) {
             <ToysIcon className={classes.flex}>add_circle</ToysIcon>
           </IconButton>
           <Text type="title" className={classes.flex}>SimMeme</Text>
-          <Button raised accent>Get Random Meme</Button>
-
+          <Button raised className={classes.extraButton}>Random Meme</Button>
+          <Button raised className={classes.extraButton}>Compose meme</Button>
         </Toolbar>
       </AppBar>
     </div>

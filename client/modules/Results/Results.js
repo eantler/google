@@ -9,7 +9,10 @@ import Divider from 'material-ui/Divider';
 import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import Card, { CardActions, CardContent, CardMedia, CardHeader } from 'material-ui/Card';
+import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
+import Icon from 'material-ui/Icon';
+import Forward from 'material-ui-icons/Forward';
 
 // Import Actions
 
@@ -37,7 +40,11 @@ const styleSheet = createStyleSheet('SimpleMediaCard', () => ({
   wideCenter: {
     width: '100%',
     alignItems: 'center',
-  }
+    justifyItems: 'center',
+  },
+  cardActions: {
+    justifyItems: 'right',
+  },
 }));
 
 const gridStyleSheet = createStyleSheet('FullWidthGrid', (theme) => ({
@@ -53,7 +60,7 @@ const gridStyleSheet = createStyleSheet('FullWidthGrid', (theme) => ({
     padding: '5px 0px 0px 16px',
   },
   cardContent: {
-    padding: '5px 0px 16px 16px',
+    padding: '5px 0px 0px 16px',
     justifyItems: 'center',
   }
 }));
@@ -84,6 +91,9 @@ export class Results extends Component {
                         <CardContent className={gridClasses.cardContent}>
                             <ClusterItem photos={item.memes} classes={clusterClasses} fatherKey={item.uniqueID}/>
                         </CardContent>
+                        <CardActions className={clusterClasses.cardActions}>
+                            <Button compact>More<Forward/></Button>
+                        </CardActions>
                       </Card>
                 </Grid>
                )

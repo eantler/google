@@ -18,8 +18,11 @@ const styleSheet = createStyleSheet('ChipsArray', (theme) => ({
     flexWrap: 'wrap',
   },
   preText: {
-    marginTop: '10px',
+    margin: '10px 10px 0px 0px',
   },
+  chipLabel: {
+    fontSize: '20px',
+  }
 }));
 
 export class Chips extends Component {
@@ -63,6 +66,7 @@ export class Chips extends Component {
           key={data.key}
           onRequestDelete={() => this.handleRequestDelete(data.key)}
           className={classes.chip}
+          labelClassName={classes.chipLabel}
         />
       );
     };
