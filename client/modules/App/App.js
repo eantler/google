@@ -71,8 +71,8 @@ export class App extends Component {
       <div >
         {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
           <Helmet
-            title="Semsim Memes"
-            titleTemplate="%s - Semsim Memes"
+            title="Sim Memes"
+            titleTemplate="%s - Sim Memes"
             meta={[
               { charset: 'utf-8' },
               {
