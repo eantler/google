@@ -16,7 +16,7 @@ export const SEARCH_DONE = 'SEARCH_DONE';
 const defaultResults = [
           {
             uniqueID: cuid(),
-            name: 'Kid, Apple',
+            name: 'Kid, Apple Inc',
             memes: [
               'http://weknowmemes.com/wp-content/uploads/2012/05/itouch-kids-meme.jpg'
               ,'https://cdn.meme.am/cache/instances/folder877/65774877.jpg'
