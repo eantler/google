@@ -11,7 +11,7 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog';
 import { toggleImageDialog } from '../../ResultsActions';
-import demoPhoto from './demoPhoto.jpg';
+import demoPhoto from './demo.jpg';
 import { createStyleSheet } from 'jss-theme-reactor';
 
 // Styles
