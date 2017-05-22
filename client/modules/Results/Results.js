@@ -97,7 +97,8 @@ export class Results extends Component {
                       <Card className={clusterClasses.wideCard}>   
                         <CardHeader title={item.name} className={gridClasses.cardHeader}/>
                         <CardContent className={gridClasses.cardContent}>
-                            <ClusterItem photos={item.memes} classes={clusterClasses} fatherKey={item.uniqueID}/>
+                            <ClusterItem photos={item.memes} classes={clusterClasses} fatherKey={item.uniqueID} dispatch={this.props.dispatch}/>
+                           
                         </CardContent>
                         <CardActions className={clusterClasses.cardActions}>
                             <Button className={clusterClasses.actionButton}>More<Forward/></Button>

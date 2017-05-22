@@ -19,6 +19,7 @@ import Grid from 'material-ui/Grid';
 // Import Actions
 import { toggleAddPost, fetchCurrentUser } from './AppActions';
 import { switchLanguage } from '../../modules/Intl/IntlActions';
+import ImageDialog from '../Results/components/ImageDialog/ImageDialog';
 
 // Creating style sheet
 const styleSheet = createStyleSheet('InteractiveGrid', () => {
@@ -85,6 +86,7 @@ export class App extends Component {
               },
             ]}
           />
+          <ImageDialog/>
           <ButtonAppBar isAuthenticated={this.props.isAuthenticated} user={this.props.user} dispatch={this.props.dispatch}/>
           <Grid container className={classes.root} justify='center' gutter={24}>
             <Grid item xs={10}>

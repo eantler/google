@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
+import { toggleImageDialog } from '../../ResultsActions';
 
 // Import Style
 
@@ -17,7 +18,7 @@ export default function ClusterItem (props) {
                    <div className={props.classes.inliner} key={String.prototype.concat(props.fatherKey,i.toString())}>
                      <Card className={props.classes.card} >    
                        <CardMedia>
-                         <img src={photo} className={props.classes.photo}/>
+                         <img src={photo} className={props.classes.photo} onClick={ () => props.dispatch(toggleImageDialog())}/>
                        </CardMedia>
                         </Card>
                    </div>
@@ -31,6 +32,7 @@ ClusterItem.propTypes = {
   photos: PropTypes.array.isRequired,
   classes: PropTypes.object.isRequired,
   fatherKey: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 
