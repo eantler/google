@@ -65,7 +65,7 @@ export default class SearchInput extends Component {
 
         <FormControl className={classes.input}>
           <InputLabel htmlFor="name">
-            Enter tag and press enter
+            Enter a tag and press enter
           </InputLabel>
           <Input
             id="name"

@@ -11,16 +11,20 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog';
 import { toggleImageDialog } from '../../ResultsActions';
-import demoPhoto from './demoPhoto.png';
+import demoPhoto from './demoPhoto.jpg';
 import { createStyleSheet } from 'jss-theme-reactor';
 
 // Styles
 const styleSheet = createStyleSheet('demoImageAndDialog', () => ({
   demoImage: {
-    width: '550px',
-    height: '400px',
+    width: '850px',
+    height: '500px',
     
   },
+  dialog: {
+      width: "100%",
+    maxWidth: "none"
+  }
 }));
 
 
@@ -45,8 +49,9 @@ constructor (props,context) {
           open={this.props.open}
           onRequestClose={this.handleRequestClose}
           className={classes.dialog}
+          maxWidth={'800px'}
         >
-          <DialogTitle>{'Photo Semsim tree'}</DialogTitle>
+      
           <DialogContent>
             <DialogContentText>
             </DialogContentText>
@@ -61,7 +66,7 @@ constructor (props,context) {
     );
   }
 }
-
+//    <DialogTitle>{'Photo Semsim tree'}</DialogTitle>
 ImageDialog.propTypes = {
       dispatch: PropTypes.func.isRequired,
 };

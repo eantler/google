@@ -44,7 +44,7 @@ export default function ButtonAppBar(props, context) {
           <IconButton >
             <ToysIcon className={classes.flex}>add_circle</ToysIcon>
           </IconButton>
-          <Text type="title" className={classes.flex}>SimMemes</Text>
+          <Text type="title" className={classes.flex}>SimMeme</Text>
           <Button raised className={classes.extraButton}>Random Meme</Button>
           <Button raised className={classes.extraButton}>Compose meme</Button>
         </Toolbar>
