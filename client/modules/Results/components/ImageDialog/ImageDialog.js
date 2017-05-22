@@ -22,8 +22,7 @@ const styleSheet = createStyleSheet('demoImageAndDialog', () => ({
     
   },
   dialog: {
-      width: "100%",
-    maxWidth: "none"
+      width: "900px",
   }
 }));
 
@@ -48,8 +47,9 @@ constructor (props,context) {
         <Dialog
           open={this.props.open}
           onRequestClose={this.handleRequestClose}
-          className={classes.dialog}
+          paperClassName={classes.dialog}
           maxWidth={'800px'}
+          width={'100%'}
         >
       
           <DialogContent>
