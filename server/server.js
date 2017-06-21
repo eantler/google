@@ -128,6 +128,7 @@ app.use('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
+
 // Render Initial HTML
 const renderFullPage = (html, css, initialState) => {
   const head = Helmet.rewind();
@@ -200,18 +201,9 @@ const renderError = err => {
       return next();
     }
 
-    const store = configureStore({
-      app : {
-        showAddPost: false,
-        isAuthenticated: false,
-        user: user,
-        showLoader: false,
-        searchResults: [],
-        tags: [],
-      },
-    });
+    const store = configureStore();
 
-
+// render in server side
     return fetchComponentData(store, renderProps.components, renderProps.params)
       .then(() => {
         const initialView = renderToString(

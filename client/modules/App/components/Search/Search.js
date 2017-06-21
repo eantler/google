@@ -10,18 +10,26 @@ import Chips from './Chips';
 import SearchButton from './SearchButton';
 import { clickSearch, performAddTag, performRemovetag } from '../../AppActions';
 import { CircularProgress } from 'material-ui/Progress';
+import SearchDialog from './SearchDialog';
 import Grid from 'material-ui/Grid';
+import _ from 'lodash';
 
 const gridStyleSheet = createStyleSheet('CenteredGrid', (theme) => ({
   root: {
     flexGrow: 1,
     marginTop: 60,
+
   },
   paper: {
     padding: 16,
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+  buttonContainer: {
+    flexBasis: 'auto',
+  },
+
+
 }));
 
 const styleSheet = createStyleSheet('PaperSheet', (theme) => ({
@@ -74,20 +82,22 @@ export class Search extends Component {
     }
 
     HandleSearch() {
-      this.props.dispatch(clickSearch());
+      this.props.dispatch(clickSearch(null,_.map(this.props.tags, 'label'),{}));
     }
+
   render() {
     const classes = this.styleManager.render(styleSheet);
     const gridClasses = this.styleManager.render(gridStyleSheet);
 
     return (
       <div className={gridClasses.root}>
-         <Grid container direction='row' gutter={8}>
+        <SearchDialog/>
+         <Grid container direction='row' justify='center' align='center' gutter={8}>
             <Grid item xs={8}>
-                <SearchInput text={this.state.inputText} onEnter={this.HandleEnterClick} chips={<Chips tags={this.props.tags} onDelete={this.HandleDelete}/>}/>             
+                <SearchInput text={this.state.inputText} onEnter={this.HandleEnterClick} chips={<Chips tags={this.props.tags} onDelete={this.HandleDelete}/>}/>
             </Grid>
-            <Grid item xs={4}>
-              <SearchButton onClick={this.HandleSearch} showLoader={this.props.showLoader}/> 
+            <Grid item xs={4} className={gridClasses.buttonContainer}>
+              <SearchButton onClick={this.HandleSearch} showLoader={this.props.showLoader}/>
             </Grid>
             <Grid item xs={12}>
                <Chips tags={this.props.tags} onDelete={this.HandleDelete}/>
@@ -131,12 +141,12 @@ export default connect(mapStateToProps)(Search);
         <div className='row'>
             <div className='three columns'>
             </div>
-        </div> 
+        </div>
         <div className='row'>
             <div className='three columns'>
               <Chips tags={this.props.tags} onDelete={this.HandleDelete}/>
             </div>
-        </div> 
-               <SearchButton onClick={this.HandleSearch} showLoader={this.props.showLoader}/> 
+        </div>
+               <SearchButton onClick={this.HandleSearch} showLoader={this.props.showLoader}/>
         </div>
       </div>*/

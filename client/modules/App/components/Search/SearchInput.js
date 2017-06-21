@@ -9,20 +9,15 @@ import FormControl from 'material-ui/Form/FormControl';
 
 const styleSheet = createStyleSheet('ComposedTextField', () => ({
   container: {
-
     width: '50%',
-
-
   },
   input: {
     margin: 10,
     textAlign:'center',
-    fontSize: '25px',
-
   },
   inputText: {
       color: '#000000',
-
+      fontFamily: 'Tahoma, Arial, sans-serif',
   },
 }));
 

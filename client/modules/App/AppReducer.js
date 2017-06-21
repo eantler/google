@@ -1,5 +1,5 @@
 // Import Actions
-import { TOGGLE_ADD_POST, CURRENT_USER_CHANGED, ADD_TAG , REMOVE_TAG, SEARCH_CLICKED, SEARCH_DONE } from './AppActions';
+import { TOGGLE_ADVANCED_DIALOG,TOGGLE_ADD_POST, CURRENT_USER_CHANGED, ADD_TAG , REMOVE_TAG, SEARCH_CLICKED, SEARCH_DONE, MORE_CLICKED } from './AppActions';
 import _ from 'lodash';
 import cuid from 'cuid';
 
@@ -11,6 +11,7 @@ const initialState = {
   showLoader: false,
   searchResults: [],
   tags: [],
+  isAdvancedOpen: false,
 };
 
 
@@ -28,7 +29,7 @@ const AppReducer = (state = initialState, action) => {
         isAuthenticated: action.isAuthenticated,
         user: action.user,
       };
-    
+
     case SEARCH_CLICKED:
       return {
         ...state,
@@ -41,7 +42,7 @@ const AppReducer = (state = initialState, action) => {
         showLoader: false,
         searchResults: action.results,
       };
-    
+
     case ADD_TAG:
       let key = cuid();
       return {
@@ -49,13 +50,26 @@ const AppReducer = (state = initialState, action) => {
         tags: state.tags.concat({key, label: action.label}),
       };
 
+    case MORE_CLICKED:
+      var results = _.map(state.searchResults, _.clone);
+      results[action.id].isExpanded = !state.searchResults[action.id].isExpanded;
+      return {
+        ...state,
+        searchResults: results,
+      };
+
       case REMOVE_TAG:
-        let len = state.tags.length;
-        let location = _.find(state.tags, (obj) => { return obj==action.id});
-        let fixedTags = state.tags;
-        fixedTags.splice(location, 1);
+        let fixedTags = state.tags.concat();
+        _.remove(fixedTags, (obj) => { return obj.key==action.id});
         return {
-          tags: fixedTags.concat(),
+          ...state,
+          tags: fixedTags,
+        };
+
+        case TOGGLE_ADVANCED_DIALOG:
+        return {
+          ...state,
+          isAdvancedOpen: !state.isAdvancedOpen,
         };
 
     default:

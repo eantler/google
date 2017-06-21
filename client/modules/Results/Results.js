@@ -13,47 +13,54 @@ import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 import Icon from 'material-ui/Icon';
 import Forward from 'material-ui-icons/Forward';
+import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
+import ExpandLessIcon from 'material-ui-icons/ExpandLess';
+
 
 // Import Actions
-
+import { moreClicked } from '../App/AppActions';
 
 //Create StyleSheets
 
 const styleSheet = createStyleSheet('SimpleMediaCard', () => ({
   wideCard: {
-    width: '100%',
-    alignItems: 'center',
+    width: '80%',
+    backgroundColor: '#eeeeee',
   },
   card: {
-    maxWidth: 200,
+    maxWidth: 220,
     margin: '10px',
-    
+
   },
   photo: {
-    width: 200,
-    height: 200,
+    width: 220,
+    height: 220,
   },
   inliner: {
     display: 'inline-block',
     justifyItems: 'center',
-    alignItems: 'space-between',
+    alignItems: 'space-around',
+
   },
   wideCenter: {
-    display: 'flex',
-    justifyContent: 'space-between',
+    flexGrow: 1,
+    justifyContent: 'space-around',
   },
   cardActions: {
-    justifyItems: 'right',
+    // justifyItems: 'right',
     fontSize: '25px',
+    // alignItems: 'right',
   },
   actionButton: {
-    fontSize: '25px',
+    fontSize: '15px',
   },
+  flexGrow: { flex: '1 1 auto' },
 }));
 
 const gridStyleSheet = createStyleSheet('FullWidthGrid', (theme) => ({
   root: {
     flexGrow: 1,
+    marginTop: 30,
   },
   paper: {
     padding: 16,
@@ -62,16 +69,22 @@ const gridStyleSheet = createStyleSheet('FullWidthGrid', (theme) => ({
   },
   cardHeader: {
     padding: '5px 16px 0px 16px',
-    fontSize: '40px',
+    fontSize: '22px',
+    fontVariant: 'small-caps',
   },
   cardContent: {
     padding: '5px 16px 0px 16px',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     justifyItems: 'center',
+  },
+  cardContainer: {
+    display: 'flex',
+    justifyContent: 'center',
   },
 
 
 }));
+
 
 
 export class Results extends Component {
@@ -80,28 +93,34 @@ export class Results extends Component {
     super(props);
     this.render = this.render.bind(this);
     this.styleManager = context.styleManager;
+
   }
 
+  HandleMoreClicked(id) {
+    this.props.dispatch(moreClicked(id));
+  }
 
   render() {
     let clusterClasses = this.styleManager.render(styleSheet);
     let gridClasses = this.styleManager.render(gridStyleSheet);
 
+
+
     return (
       <div className={gridClasses.root}>
-        <Grid container gutter={24} justify='center'>
+        <Grid container gutter={40} justify='center'>
           {
             this.props.results.map((item,i) => {
               return (
-                <Grid item xs={11} key={item.uniqueID}>
-                      <Card className={clusterClasses.wideCard}>   
-                        <CardHeader title={item.name} className={gridClasses.cardHeader}/>
+                <Grid item xs={11} key={i} className={gridClasses.cardContainer}>
+                      <Card raised={false} className={clusterClasses.wideCard}>
+                        <CardHeader title={item.title} className={gridClasses.cardHeader}/>
                         <CardContent className={gridClasses.cardContent}>
-                            <ClusterItem photos={item.memes} classes={clusterClasses} fatherKey={item.uniqueID} dispatch={this.props.dispatch}/>
-                           
+                            <ClusterItem photos={item.memes} classes={clusterClasses} isExpanded={item.isExpanded} fatherKey={i.toString()} dispatch={this.props.dispatch}/>
                         </CardContent>
                         <CardActions className={clusterClasses.cardActions}>
-                            <Button className={clusterClasses.actionButton}>More<Forward/></Button>
+                            <div className={clusterClasses.flexGrow} />
+                            <Button className={clusterClasses.actionButton} onClick={() => this.HandleMoreClicked(i)}> {item.isExpanded? 'Less' : 'More'}<ExpandMoreIcon/></Button>
                         </CardActions>
                       </Card>
                 </Grid>
@@ -111,7 +130,7 @@ export class Results extends Component {
         }
       </Grid>
     </div>
-    ) 
+    )
 }
 
 }

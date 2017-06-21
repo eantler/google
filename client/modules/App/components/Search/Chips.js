@@ -13,16 +13,18 @@ const styleSheet = createStyleSheet('ChipsArray', (theme) => ({
   },
   row: {
     display: 'flex',
-    justifyContent: 'left',
+    justifyContent: 'center',
     alignContent: 'center',
     flexWrap: 'wrap',
+    margin: '0px 0px 20px 0px',
   },
   preText: {
     margin: '10px 10px 0px 0px',
     color: '#40c4ff',
+    fontSize: '18px',
+    fontFamily: 'Tahoma, Arial, sans-serif',
   },
   chipLabel: {
-    fontSize: '25px',
   }
 }));
 
@@ -36,7 +38,7 @@ export class Chips extends Component {
 
     this.styleManager = context.styleManager;
     this.handleRequestDelete = this.handleRequestDelete.bind(this);
-    
+
   }
   static contextTypes = {
 
@@ -72,11 +74,17 @@ export class Chips extends Component {
       );
     };
 
+    // return (
+    //   <div className={classes.row}>
+    //     <Typography type="headline" className={classes.preText} >
+    //         Query tags:
+    //     </Typography>
+    //    {this.props.displayTags.map(renderChip, this)}
+    //   </div>
+    // );
+
     return (
       <div className={classes.row}>
-        <Typography type="headline" className={classes.preText} >
-            Query tags:
-        </Typography>
        {this.props.displayTags.map(renderChip, this)}
       </div>
     );
@@ -98,4 +106,5 @@ function mapStateToProps(store) {
         displayTags: store.app.tags,
       };
   }
+
 export default connect(mapStateToProps)(Chips);

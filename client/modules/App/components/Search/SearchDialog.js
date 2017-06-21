@@ -10,8 +10,7 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
-import { toggleImageDialog } from '../../ResultsActions';
-import demoPhoto from './demo.jpg';
+import { toggleAdvancedDialog } from '../../AppActions';
 import { createStyleSheet } from 'jss-theme-reactor';
 import Chip from 'material-ui/Chip';
 
@@ -53,36 +52,21 @@ const styleSheet = createStyleSheet('demoImageAndDialog', () => ({
 
 
 
-export class ImageDialog extends Component {
+export class SearchDialog extends Component {
 
 constructor (props,context) {
     super(props);
     this.styleManager = context.styleManager;
 }
 
-  handleRequestClose = () => this.props.dispatch(toggleImageDialog(this.props.clusterId, this.props.memeId));
+  handleRequestClose = () => this.props.dispatch(toggleAdvancedDialog());
 
 
 
   render() {
     let classes = this.styleManager.render(styleSheet);
-    let clusterIndex = this.props.clusterId != null ? this.props.clusterId : 0;
-    let memeIndex = this.props.memeId != null ? this.props.memeId: 0;
-    let dphoto = this.props.clusters.length > 0 ? this.props.clusters[clusterIndex].memes[memeIndex].meme : demoPhoto;
-    let rank = dphoto != demoPhoto ? this.props.clusters[clusterIndex].memes[memeIndex].rank : 0
-    let simScore = dphoto != demoPhoto ? this.props.clusters[clusterIndex].memes[memeIndex].sim_score : 0
-    let tags = dphoto != demoPhoto ? this.props.clusters[clusterIndex].memes[memeIndex].tags : []
-    let visual_sim_score = dphoto != demoPhoto ? this.props.clusters[clusterIndex].memes[memeIndex].visual_similarity : null
 
-    const renderChip = (label) => {
-      return (
-              <Chip
-                label={label}
-                key={label}
-                className={classes.chip}
-              />
-            )
-    };
+
     return (
       <div>
         <Dialog
@@ -95,13 +79,10 @@ constructor (props,context) {
 
           <DialogContent>
 
-            <img src={dphoto} className={classes.memeImage}/>
+
 
             <DialogContentText className={classes.details}>
-            <div className={classes.row}>{ tags.map(renderChip,tags) }</div>
-              Visual Similarity score: {visual_sim_score != null ? visual_sim_score.toFixed(4) : 'NA'} <br/>
-              Rank: {rank}# <br/>
-              Sim Score: {simScore.toFixed(4)} <br/>
+              This is an example text.
             </DialogContentText>
 
           </DialogContent>
@@ -117,24 +98,22 @@ constructor (props,context) {
 // <DialogTitle>{'Explanation'}</DialogTitle>
 
 
-ImageDialog.propTypes = {
+SearchDialog.propTypes = {
       dispatch: PropTypes.func.isRequired,
       // clusterId: PropTypes.string.isRequired,
       // memeId: PropTypes.string.isRequired,
 
 };
 
-ImageDialog.contextTypes = {
+SearchDialog.contextTypes = {
   styleManager: customPropTypes.muiRequired,
 };
 
 function mapStateToProps(store) {
   return {
-    open: store.results.isDialogOpen,
-    clusterId: store.results.clusterId,
-    memeId: store.results.memeId,
-    clusters: store.app.searchResults,
+    open: store.app.isAdvancedOpen,
+    tags: store.app.tags,
   };
 }
 
-export default connect(mapStateToProps)(ImageDialog);
+export default connect(mapStateToProps)(SearchDialog);

@@ -1,12 +1,13 @@
 // @flow weak
 
 import React, { Component, PropTypes } from 'react';
+import {connect} from 'react-redux';
 import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
-
+import { toggleAdvancedDialog } from '../../AppActions';
 const gridStyleSheet = createStyleSheet('CenteredGrid', (theme) => ({
   root: {
     flexGrow: 1,
@@ -19,16 +20,21 @@ const gridStyleSheet = createStyleSheet('CenteredGrid', (theme) => ({
 }));
 
 const styleSheet = createStyleSheet('RaisedButtons', (theme) => ({
-  button: {
+  raisedButton: {
     margin: theme.spacing.unit,
     color: 'rgb(255, 255, 255)',
     alignSelf: 'center',
     display: 'inline-block',
-    fontSize: '25px',
-  }
+
+  },
+  button: {
+    margin: theme.spacing.unit,
+    alignSelf: 'center',
+    display: 'inline-block',
+  },
 }));
 
-export default class RaisedButtons extends Component {
+export class RaisedButtons extends Component {
 
   constructor(props,context) {
     super(props);
@@ -41,8 +47,8 @@ export default class RaisedButtons extends Component {
 
   return (
     <div>
-            <Button raised primary className={classes.button} onClick={() => {this.props.onClick()}}>Search</Button>
-            <Button raised accent className={classes.button}>Advanced</Button>
+            <Button raised primary className={classes.raisedButton} onClick={() => {this.props.onClick()}}>Search</Button>
+            <Button accent className={classes.button} onClick={() => this.props.dispatch(toggleAdvancedDialog())}>Advanced</Button>
     </div>
   );
   }
@@ -50,6 +56,7 @@ export default class RaisedButtons extends Component {
 
 // () => this.props.onClick()
 RaisedButtons.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   showLoader: PropTypes.bool.isRequired,
 }
@@ -57,6 +64,7 @@ RaisedButtons.contextTypes = {
   styleManager: customPropTypes.muiRequired,
 };
 
+export default connect()(RaisedButtons);
 //Loader
                 //     {this.props.showLoader &&
                 //   <CircularProgress className={classes.progress} />

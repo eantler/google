@@ -1,7 +1,10 @@
 import callApi from '../../util/apiCaller';
+import callPythonApi from '../../util/pythonApiCaller';
 import loginApi from '../../util/loginApi';
+//import SOME API from
 import { browserHistory } from 'react-router';
 import cuid from 'cuid';
+import _ from 'lodash';
 
 // Export Constants
 export const TOGGLE_ADD_POST = 'TOGGLE_ADD_POST';
@@ -12,6 +15,8 @@ export const ADD_TAG = 'ADD_TAG';
 export const REMOVE_TAG  = 'REMOVE_TAG';
 export const SEARCH_CLICKED = 'SEARCH_CLICKED';
 export const SEARCH_DONE = 'SEARCH_DONE';
+export const MORE_CLICKED = 'MORE_CLICKED';
+export const TOGGLE_ADVANCED_DIALOG = 'TOGGLE_ADVANCED_DIALOG'
 
 const defaultResults = [
           {
@@ -72,6 +77,12 @@ export function startSearch() {
 
 }
 
+export function moreClicked(id){
+    return {
+      type: MORE_CLICKED,
+      id
+    }
+}
 export function endSearch(results) {
   // browserHistory.push('/results');
   return {
@@ -79,16 +90,30 @@ export function endSearch(results) {
       results
   }
 }
-export function clickSearch() {
+
+export function toggleAdvancedDialog() {
+  return {
+    type: TOGGLE_ADVANCED_DIALOG,
+  };
+}
+
+export function clickSearch(photo, tags, advanced) {
   return (dispatch) => {
   //making the loader appear
   dispatch(startSearch());
-
-  // contacting server and doing unsync stuff..
-  setTimeout(() => {
-      dispatch(endSearch(defaultResults)); 
-    }, 2000);
-
+  // api call
+  console.log('staring to call api');
+  callPythonApi('get_clustered_top_k_similar_memes', 'post', {photo, tags, advanced}).then( res => {
+    console.log('got response: ');
+    console.log(JSON.stringify(res));
+    var clusters = res.clusters;
+    _.forEach(clusters, (item,i) => {
+      item.isExpanded = false;
+    });
+    dispatch(endSearch(clusters));
+  })
+  // // contacting server and doing unsync stuff..
+  // dispatch(endSearch(defaultResults));
   }
 }
 
@@ -115,7 +140,6 @@ export function addTag(label) {
 }
 
 export function removeTag(id) {
-  console.log("added tag");
   return {
     type: REMOVE_TAG,
     id
@@ -130,6 +154,7 @@ export function performAddTag(label) {
 }
 
 export function performRemovetag(id) {
+  // do some calling to server
   return (dispatch) => {
     dispatch(removeTag(id));
   };
