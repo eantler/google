@@ -31,7 +31,7 @@ export default function ClusterItem (props) {
                           </Typography>
                         </CardContent>
                         <CardActions>
-                          <Button primary compact onClick={ () => props.dispatch(toggleImageDialog(parseInt(props.fatherKey),i))}>Learn More</Button>
+                          <Button color="primary" onClick={ () => props.dispatch(toggleImageDialog(parseInt(props.fatherKey),i))}>Learn More</Button>
                         </CardActions>
                         </Card>
                    </div>

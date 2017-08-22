@@ -57,15 +57,15 @@ const css = styleManager.sheetsToString();
 mongoose.Promise = global.Promise;
 
 // MongoDB Connection
-mongoose.connect(serverConfig.mongoURL, (error) => {
-  if (error) {
-    console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
-    throw error;
-  }
-
-  // feed some dummy data in DB.
-  dummyData();
-});
+// mongoose.connect(serverConfig.mongoURL, (error) => {
+//   if (error) {
+//     console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
+//     throw error;
+//   }
+//
+//   // feed some dummy data in DB.
+//   dummyData();
+// });
 
 
 
@@ -93,7 +93,7 @@ app.use(
           resave: true,
           saveUninitialized: true,
           cookie: {maxAge: 2592000000}, // one month
-          store: new MongoStore({ mongooseConnection: mongoose.connection }),
+          //store: new MongoStore({ mongooseConnection: mongoose.connection }),
         }
       ));
 

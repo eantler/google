@@ -49,3 +49,40 @@
 2017-06-21T14:12:13.041+0300 I NETWORK  [thread1] connection accepted from 127.0.0.1:58965 #12 (2 connections now open)
 2017-06-21T14:15:27.441+0300 I -        [conn12] end connection 127.0.0.1:58965 (2 connections now open)
 2017-06-21T14:15:27.442+0300 I -        [conn11] end connection 127.0.0.1:58964 (2 connections now open)
+2017-06-21T14:23:32.924+0300 I NETWORK  [thread1] connection accepted from 127.0.0.1:61627 #13 (1 connection now open)
+2017-06-21T14:23:32.931+0300 I NETWORK  [conn13] received client metadata from 127.0.0.1:61627 conn13: { driver: { name: "nodejs", version: "2.2.27" }, os: { type: "Darwin", name: "darwin", architecture: "x64", version: "16.6.0" }, platform: "Node.js v6.10.3, LE, mongodb-core: 2.1.11" }
+2017-06-21T14:23:32.989+0300 I NETWORK  [thread1] connection accepted from 127.0.0.1:61628 #14 (2 connections now open)
+2017-06-21T14:26:07.777+0300 I -        [conn13] end connection 127.0.0.1:61627 (2 connections now open)
+2017-06-21T14:26:07.777+0300 I -        [conn14] end connection 127.0.0.1:61628 (2 connections now open)
+2017-06-21T14:28:02.017+0300 I NETWORK  [thread1] connection accepted from 127.0.0.1:62669 #15 (1 connection now open)
+2017-06-21T14:28:02.024+0300 I NETWORK  [conn15] received client metadata from 127.0.0.1:62669 conn15: { driver: { name: "nodejs", version: "2.2.27" }, os: { type: "Darwin", name: "darwin", architecture: "x64", version: "16.6.0" }, platform: "Node.js v6.10.3, LE, mongodb-core: 2.1.11" }
+2017-06-21T14:28:02.063+0300 I NETWORK  [thread1] connection accepted from 127.0.0.1:62670 #16 (2 connections now open)
+2017-06-21T23:11:28.576+0300 I -        [conn16] end connection 127.0.0.1:62670 (2 connections now open)
+2017-06-23T21:17:29.666+0300 I COMMAND  [ftdc] serverStatus was very slow: { after basic: 0, after asserts: 0, after backgroundFlushing: 0, after connections: 0, after dur: 0, after extra_info: 0, after globalLock: 165935433, after locks: 165935433, after network: 165935433, after opLatencies: 165935433, after opcounters: 165935433, after opcountersRepl: 165935485, after repl: 165935485, after security: 165935485, after storageEngine: 165935485, after wiredTiger: 165935564, at end: 165935649 }
+2017-06-24T22:40:17.535+0300 I -        [conn15] end connection 127.0.0.1:62669 (1 connection now open)
+2017-06-24T22:40:18.838+0300 I NETWORK  [thread1] connection accepted from 127.0.0.1:64959 #17 (1 connection now open)
+2017-06-27T14:06:23.434+0300 I COMMAND  [ftdc] serverStatus was very slow: { after basic: 0, after asserts: 0, after backgroundFlushing: 0, after connections: 0, after dur: 0, after extra_info: 0, after globalLock: 0, after locks: 0, after network: 0, after opLatencies: 0, after opcounters: 0, after opcountersRepl: 0, after repl: 0, after security: 0, after storageEngine: 0, after wiredTiger: 56856835, at end: 56856858 }
+2017-06-29T13:49:05.256+0300 I -        [conn17] end connection 127.0.0.1:64959 (1 connection now open)
+2017-06-29T13:49:31.830+0300 I NETWORK  [thread1] connection accepted from 127.0.0.1:54168 #18 (1 connection now open)
+2017-06-29T13:49:31.834+0300 I NETWORK  [conn18] received client metadata from 127.0.0.1:54168 conn18: { driver: { name: "nodejs", version: "2.2.27" }, os: { type: "Darwin", name: "darwin", architecture: "x64", version: "16.6.0" }, platform: "Node.js v6.10.3, LE, mongodb-core: 2.1.11" }
+2017-06-29T13:49:31.890+0300 I NETWORK  [thread1] connection accepted from 127.0.0.1:54173 #19 (2 connections now open)
+2017-06-29T14:29:37.705+0300 I -        [conn19] end connection 127.0.0.1:54173 (2 connections now open)
+2017-06-29T14:29:37.705+0300 I -        [conn18] end connection 127.0.0.1:54168 (2 connections now open)
+2017-06-29T14:30:02.994+0300 I NETWORK  [thread1] connection accepted from 127.0.0.1:64036 #20 (1 connection now open)
+2017-06-29T14:30:03.003+0300 I NETWORK  [conn20] received client metadata from 127.0.0.1:64036 conn20: { driver: { name: "nodejs", version: "2.2.27" }, os: { type: "Darwin", name: "darwin", architecture: "x64", version: "16.6.0" }, platform: "Node.js v6.10.3, LE, mongodb-core: 2.1.11" }
+2017-06-29T14:30:03.046+0300 I NETWORK  [thread1] connection accepted from 127.0.0.1:64037 #21 (2 connections now open)
+2017-06-29T15:00:29.458+0300 I -        [conn21] end connection 127.0.0.1:64037 (2 connections now open)
+2017-06-29T15:00:29.458+0300 I -        [conn20] end connection 127.0.0.1:64036 (2 connections now open)
+2017-07-01T12:59:22.339+0300 I NETWORK  [thread1] connection accepted from 127.0.0.1:59582 #22 (1 connection now open)
+2017-07-01T12:59:22.358+0300 I NETWORK  [conn22] received client metadata from 127.0.0.1:59582 conn22: { driver: { name: "nodejs", version: "2.2.27" }, os: { type: "Darwin", name: "darwin", architecture: "x64", version: "16.6.0" }, platform: "Node.js v6.10.3, LE, mongodb-core: 2.1.11" }
+2017-07-01T12:59:22.411+0300 I NETWORK  [thread1] connection accepted from 127.0.0.1:59583 #23 (2 connections now open)
+2017-07-05T10:49:54.020+0300 I COMMAND  [PeriodicTaskRunner] task: UnusedLockCleaner took: 201ms
+2017-07-05T10:49:54.362+0300 I COMMAND  [ftdc] serverStatus was very slow: { after basic: 49075865, after asserts: 49076078, after backgroundFlushing: 49076196, after connections: 49076223, after dur: 49076234, after extra_info: 49076271, after globalLock: 49076271, after locks: 49076284, after network: 49076284, after opLatencies: 49076284, after opcounters: 49076284, after opcountersRepl: 49076308, after repl: 49076308, after security: 49076321, after storageEngine: 49076331, after wiredTiger: 49076497, at end: 49076621 }
+2017-07-05T10:49:55.183+0300 I -        [conn22] end connection 127.0.0.1:59582 (2 connections now open)
+2017-07-05T10:49:55.204+0300 I -        [conn23] end connection 127.0.0.1:59583 (1 connection now open)
+2017-07-05T10:49:56.311+0300 I NETWORK  [thread1] connection accepted from 127.0.0.1:51882 #24 (1 connection now open)
+2017-07-06T00:15:35.751+0300 I -        [conn24] end connection 127.0.0.1:51882 (1 connection now open)
+2017-07-06T00:15:36.901+0300 I NETWORK  [thread1] connection accepted from 127.0.0.1:50661 #25 (1 connection now open)
+2017-07-08T11:39:59.586+0300 I -        [conn25] end connection 127.0.0.1:50661 (1 connection now open)
+2017-07-08T11:40:00.785+0300 I NETWORK  [thread1] connection accepted from 127.0.0.1:50816 #26 (1 connection now open)
+2017-07-14T15:18:21.571+0300 I -        [conn26] end connection 127.0.0.1:50816 (1 connection now open)

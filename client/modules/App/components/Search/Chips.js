@@ -69,7 +69,7 @@ export class Chips extends Component {
           key={data.key}
           onRequestDelete={() => this.handleRequestDelete(data.key)}
           className={classes.chip}
-          labelClassName={classes.chipLabel}
+      
         />
       );
     };

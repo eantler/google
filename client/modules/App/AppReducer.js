@@ -1,5 +1,14 @@
 // Import Actions
-import { TOGGLE_ADVANCED_DIALOG,TOGGLE_ADD_POST, CURRENT_USER_CHANGED, ADD_TAG , REMOVE_TAG, SEARCH_CLICKED, SEARCH_DONE, MORE_CLICKED } from './AppActions';
+import { SAVE_ADVANCED_OPTIONS,
+  TOGGLE_ADVANCED_DIALOG,
+  TOGGLE_ADD_POST,
+  CURRENT_USER_CHANGED,
+  ADD_TAG,
+  REMOVE_TAG,
+  SEARCH_CLICKED,
+  SEARCH_DONE,
+  MORE_CLICKED,
+  TAG_WEIGHT_CHANGE } from './AppActions';
 import _ from 'lodash';
 import cuid from 'cuid';
 
@@ -12,6 +21,7 @@ const initialState = {
   searchResults: [],
   tags: [],
   isAdvancedOpen: false,
+  advancedOptions: {},
 };
 
 
@@ -41,13 +51,14 @@ const AppReducer = (state = initialState, action) => {
         ...state,
         showLoader: false,
         searchResults: action.results,
+        advancedOptions:{},
       };
 
     case ADD_TAG:
       let key = cuid();
       return {
         ...state,
-        tags: state.tags.concat({key, label: action.label}),
+        tags: state.tags.concat({key, label: action.label, weight: 1}),
       };
 
     case MORE_CLICKED:
@@ -71,6 +82,32 @@ const AppReducer = (state = initialState, action) => {
           ...state,
           isAdvancedOpen: !state.isAdvancedOpen,
         };
+
+        case SAVE_ADVANCED_OPTIONS:
+          var newTagsArray = state.tags.slice();
+          var advancedTagsWeights = {};
+          _.forEach(newTagsArray, (tag,index,collection) => {
+            collection[index].weight = collection[index].tempWeight ? collection[index].tempWeight : collection[index].weight;
+            advancedTagsWeights[tag.label] = collection[index].weight;
+          });
+          return {
+            ...state,
+            tags: newTagsArray,
+            advancedOptions: {...action.advanced,
+                              tags_weights: advancedTagsWeights},
+            isAdvancedOpen: !state.isAdvancedOpen,
+          };
+
+        case TAG_WEIGHT_CHANGE:
+          var newTagsArray = state.tags.slice();
+          var index = _.findIndex(state.tags, (tag) => {
+              return tag.key==action.id ? true : false;
+          });
+          newTagsArray[index].tempWeight = action.value;
+        return {
+          ...state,
+          tags: newTagsArray,
+        }
 
     default:
       return state;

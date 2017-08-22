@@ -82,7 +82,7 @@ export class Search extends Component {
     }
 
     HandleSearch() {
-      this.props.dispatch(clickSearch(null,_.map(this.props.tags, 'label'),{}));
+      this.props.dispatch(clickSearch(null,_.map(this.props.tags, 'label'),this.props.advanced));
     }
 
   render() {
@@ -121,6 +121,7 @@ export class Search extends Component {
 function mapStateToProps(store) {
       return {
         tags: store.app.tags,
+        advanced: store.app.advancedOptions,
         showLoader: store.app.showLoader,
       };
   }

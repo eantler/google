@@ -11,45 +11,52 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog';
 import { toggleAdvancedDialog } from '../../AppActions';
+import { saveAdvancedOptions } from '../../AppActions';
 import { createStyleSheet } from 'jss-theme-reactor';
-import Chip from 'material-ui/Chip';
+import TextField from 'material-ui/TextField';
+import List, {
+  ListItem,
+  ListItemIcon,
+  ListItemSecondaryAction,
+  ListItemText,
+  ListSubheader,
+} from 'material-ui/List';
+import DialogTagsWeight from './dialogTagsWeight';
+import FavoriteIcon from 'material-ui-icons/Favorite';
+
+
 
 // Styles
-const styleSheet = createStyleSheet('demoImageAndDialog', () => ({
-  memeImage: {
-    width: '220px',
-    height: '220px',
-    align: 'left',
-    padding:'1px',
-    border:'1px solid #021a40',
-
+const styleSheet = createStyleSheet('searchDialog', () => ({
+  listRoot: {
+  width: '100%',
+  maxWidth: 300,
+},
+sections: {
+  width: '100%',
+  maxWidth: 300,
+  paddingBottom: "8px",
+},
+  paper: {
+      width: '600px',
+      height:'500px',
   },
-  dialog: {
-      width: "700px",
-      // height:'700px',
-  },
-  details: {
-    fontFamily: 'Tahoma, Arial, sans-serif',
-    color: '#2d2d2d',
-    fontSize: '18px',
-    margin: '15px 0px 0px 0px',
-  },
-  chip: {
-   margin: 3,
- },
- row: {
-   display: 'flex',
+ col: {
    justifyContent: 'center',
    flexWrap: 'wrap',
  },
- row: {
-   display: 'flex',
-   justifyContent: 'initial',
-   flexWrap: 'wrap',
-   margin: '0px 0px 10px 0px',
+ input: {
+   width: 42,
+   fontSize: "15px",
  },
-}));
+ simSelection: {
+   paddingLeft: "16px",
+    display: 'flex',
+    alignItems: "flex-end",
+    justifyContent: "space-between",
 
+ }
+}));
 
 
 export class SearchDialog extends Component {
@@ -57,37 +64,116 @@ export class SearchDialog extends Component {
 constructor (props,context) {
     super(props);
     this.styleManager = context.styleManager;
+    this.state = {
+        k:"15",
+        method:"semsim",
+        visual_factor:"0.2",
+        tags_weights:{},
+        tempChanges: {},
+      };
 }
 
+
+
   handleRequestClose = () => this.props.dispatch(toggleAdvancedDialog());
+  handleRequestDone = () =>  {
+    Object.assign(this.state, {...this.state,...this.state.tempChanges});
+    this.state.tempChanges=undefined;
+    console.log(JSON.stringify(this.state));
+    this.props.dispatch(saveAdvancedOptions(this.state));
+  }
 
 
 
   render() {
-    let classes = this.styleManager.render(styleSheet);
+    const classes = this.styleManager.render(styleSheet);
+
+    // function to render a tag wight textbox for each tag.
+    const renderTagsWeights = (data) => {
+      return (
+          <DialogTagsWeight
+            id={data.key}
+            key={data.key}
+            label={data.label}
+            value={data.weight.toString()}
+            />
+            )
+    };
 
 
     return (
       <div>
         <Dialog
           open={this.props.open}
-          onRequestClose={this.handleRequestClose}
-          paperClassName={classes.dialog}
-          // maxWidth={'500px'}
-          // width={'100%'}
         >
-
+          <DialogTitle>{'Advanced Options'}</DialogTitle>
           <DialogContent>
 
-
-
-            <DialogContentText className={classes.details}>
-              This is an example text.
+            <DialogContentText>
+              Here you can set some advanced search options<br/>
             </DialogContentText>
 
+
+            <div className={classes.sections}>
+              <ListSubheader>Number of Memes</ListSubheader>
+                <div className={classes.simSelection}>
+                  <TextField
+                    id={"number_of_memes"}
+                    type="number"
+                    defaultValue={this.state.k}
+                    className={classes.input}
+                    inputProps = {{min:"1", max:"50", step:"1"}}
+                    onChange = {event => this.setState({tempChanges: {
+                      ...this.state.tempChanges,
+                      k: event.target.value ,
+                    }})}
+                    />
+                </div>
+            </div>
+
+            <div className={classes.listRoot}>
+              <List subheader={<ListSubheader>Tags Weights</ListSubheader>}>
+                { this.props.tags.map(renderTagsWeights,this.props.tags) }
+              </List>
+            </div>
+
+            <div className={classes.sections}>
+            <ListSubheader>Similarity Method</ListSubheader>
+              <div className={classes.simSelection}>
+                <select
+                name="similarity method" defaultValue={this.state.method}
+                onChange = {event => this.setState({tempChanges: {
+                  ...this.state.tempChanges,
+                  method: event.target.value,
+                }})}
+                 >
+                  <option value="semsim">Semsim</option>
+                  <option value="another method">Another Method</option>
+                  <option value="other method">Other Method</option>
+                </select>
+              </div>
+            </div>
+
+            <div className={classes.sections}>
+              <ListSubheader>Visual Similarity Weight</ListSubheader>
+                <div className={classes.simSelection}>
+                  <TextField
+                    id={"visual_similarity"}
+                    type="number"
+                    defaultValue={this.state.visual_factor}
+                    className={classes.input}
+                    inputProps = {{min:"0", max:"1", step:"0.1"}}
+                    onChange = {event => this.setState({tempChanges: {
+                      ...this.state.tempChanges,
+                      visual_factor: event.target.value,
+                    }})}
+                    />
+                </div>
+            </div>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleRequestClose} primary>Close</Button>
+            <Button color="primary" onClick={this.handleRequestClose}>Cancel</Button>
+            <Button color="primary" onClick={this.handleRequestDone}>Done</Button>
           </DialogActions>
         </Dialog>
       </div>
@@ -95,13 +181,9 @@ constructor (props,context) {
   }
 }
 
-// <DialogTitle>{'Explanation'}</DialogTitle>
-
 
 SearchDialog.propTypes = {
       dispatch: PropTypes.func.isRequired,
-      // clusterId: PropTypes.string.isRequired,
-      // memeId: PropTypes.string.isRequired,
 
 };
 

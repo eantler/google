@@ -40,11 +40,6 @@ const styleSheet = createStyleSheet('demoImageAndDialog', () => ({
  },
  row: {
    display: 'flex',
-   justifyContent: 'center',
-   flexWrap: 'wrap',
- },
- row: {
-   display: 'flex',
    justifyContent: 'initial',
    flexWrap: 'wrap',
    margin: '0px 0px 10px 0px',
@@ -73,6 +68,8 @@ constructor (props,context) {
     let simScore = dphoto != demoPhoto ? this.props.clusters[clusterIndex].memes[memeIndex].sim_score : 0
     let tags = dphoto != demoPhoto ? this.props.clusters[clusterIndex].memes[memeIndex].tags : []
     let visual_sim_score = dphoto != demoPhoto ? this.props.clusters[clusterIndex].memes[memeIndex].visual_similarity : null
+    let explanation = dphoto != demoPhoto ? this.props.clusters[clusterIndex].memes[memeIndex].explanation : null
+
 
     const renderChip = (label) => {
       return (
@@ -87,7 +84,7 @@ constructor (props,context) {
       <div>
         <Dialog
           open={this.props.open}
-          onRequestClose={this.handleRequestClose}
+          // onRequestClose={this.handleRequestClose}
           paperClassName={classes.dialog}
           // maxWidth={'500px'}
           // width={'100%'}
@@ -102,11 +99,12 @@ constructor (props,context) {
               Visual Similarity score: {visual_sim_score != null ? visual_sim_score.toFixed(4) : 'NA'} <br/>
               Rank: {rank}# <br/>
               Sim Score: {simScore.toFixed(4)} <br/>
+              Explanation: {explanation} <br/>
             </DialogContentText>
 
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleRequestClose} primary>Close</Button>
+            <Button onClick={this.handleRequestClose} color="primary">Close</Button>
           </DialogActions>
         </Dialog>
       </div>

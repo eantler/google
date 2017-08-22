@@ -47,8 +47,8 @@ export class RaisedButtons extends Component {
 
   return (
     <div>
-            <Button raised primary className={classes.raisedButton} onClick={() => {this.props.onClick()}}>Search</Button>
-            <Button accent className={classes.button} onClick={() => this.props.dispatch(toggleAdvancedDialog())}>Advanced</Button>
+            <Button raised color="primary" className={classes.raisedButton} onClick={() => {this.props.onClick()}}>Search</Button>
+            <Button color="accent" className={classes.button} onClick={() => this.props.dispatch(toggleAdvancedDialog())}>Advanced</Button>
     </div>
   );
   }
