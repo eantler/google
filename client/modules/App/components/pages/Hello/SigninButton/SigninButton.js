@@ -42,7 +42,7 @@ export default function RaisedButtons(props, context) {
 }
 
 RaisedButtons.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
+  //styleManager: customPropTypes.muiRequired,
 
 };
 

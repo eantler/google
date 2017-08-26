@@ -12,7 +12,6 @@ import Dialog, {
 } from 'material-ui/Dialog';
 import { toggleAdvancedDialog } from '../../AppActions';
 import { saveAdvancedOptions } from '../../AppActions';
-import { createStyleSheet } from 'jss-theme-reactor';
 import TextField from 'material-ui/TextField';
 import List, {
   ListItem,
@@ -26,7 +25,11 @@ import FavoriteIcon from 'material-ui-icons/Favorite';
 
 
 
-// Styles
+//Styles
+import { createStyleSheet, createStyleManager } from 'jss-theme-reactor';;
+import { create as createJss } from 'jss';
+import preset from 'jss-preset-default';
+
 const styleSheet = createStyleSheet('searchDialog', () => ({
   listRoot: {
   width: '100%',
@@ -63,7 +66,11 @@ export class SearchDialog extends Component {
 
 constructor (props,context) {
     super(props);
-    this.styleManager = context.styleManager;
+    this.styleManager = createStyleManager({
+        jss: createJss(preset()),
+        theme: props.theme,
+      });
+
     this.state = {
         k:"15",
         method:"semsim",
@@ -188,7 +195,7 @@ SearchDialog.propTypes = {
 };
 
 SearchDialog.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
+  //styleManager: customPropTypes.muiRequired,
 };
 
 function mapStateToProps(store) {

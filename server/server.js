@@ -41,6 +41,10 @@ import serverConfig from './config';
 // Import Material Ui
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import createStyleManager from '../config/palette';
+import { JssProvider, SheetsRegistry } from 'react-jss'
+import { create } from 'jss';
+import preset from 'jss-preset-default';
+import createGenerateClassName from 'material-ui/styles/createGenerateClassName';
 
 // Import Passport
 import passport from 'passport';
@@ -51,14 +55,18 @@ import * as passportHandler from './passportHandle';
 let GoogleStrategy = passportGoogle.OAuth2Strategy;
 
 //set up styles
-const { styleManager, theme } = createStyleManager();
-const css = styleManager.sheetsToString();
+const  theme  = createStyleManager();
+const sheetsRegistry = new SheetsRegistry();
+
+const jss = create(preset());
+jss.options.createGenerateClassName = createGenerateClassName;
+
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
 
 // MongoDB Connection
 // mongoose.connect(serverConfig.mongoURL, (error) => {
-//   if (error) {
+//   if (error) {x
 //     console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
 //     throw error;
 //   }
@@ -207,18 +215,21 @@ const renderError = err => {
     return fetchComponentData(store, renderProps.components, renderProps.params)
       .then(() => {
         const initialView = renderToString(
-          <MuiThemeProvider styleManager={styleManager} theme={theme}>
+          <JssProvider registry={sheetsRegistry} jss={jss}>
+           <MuiThemeProvider theme={theme} sheetsManager={new Map()}>
             <Provider store={store}>
               <IntlWrapper>
                 <RouterContext {...renderProps} />
               </IntlWrapper>
             </Provider>
-          </MuiThemeProvider>
+           </MuiThemeProvider>
+          </JssProvider>
         );
 
 
         const finalState = store.getState();;
 
+        const css = sheetsRegistry.toString()
 
         res
           .set('Content-Type', 'text/html')

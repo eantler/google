@@ -12,10 +12,14 @@ import Dialog, {
 } from 'material-ui/Dialog';
 import { toggleImageDialog } from '../../ResultsActions';
 import demoPhoto from './demo.jpg';
-import { createStyleSheet } from 'jss-theme-reactor';
 import Chip from 'material-ui/Chip';
 
+
 // Styles
+import { createStyleSheet, createStyleManager } from 'jss-theme-reactor';;
+import { create as createJss } from 'jss';
+import preset from 'jss-preset-default';
+
 const styleSheet = createStyleSheet('demoImageAndDialog', () => ({
   memeImage: {
     width: '220px',
@@ -52,7 +56,10 @@ export class ImageDialog extends Component {
 
 constructor (props,context) {
     super(props);
-    this.styleManager = context.styleManager;
+    this.styleManager = createStyleManager({
+        jss: createJss(preset()),
+        theme: props.theme,
+      });
 }
 
   handleRequestClose = () => this.props.dispatch(toggleImageDialog(this.props.clusterId, this.props.memeId));
@@ -123,7 +130,7 @@ ImageDialog.propTypes = {
 };
 
 ImageDialog.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
+  //styleManager: customPropTypes.muiRequired,
 };
 
 function mapStateToProps(store) {

@@ -6,7 +6,6 @@ import _ from 'lodash';
 import ClusterItem from './components/ClusterItem/ClusterItem'
 import Typography from 'material-ui/Typography';
 import Divider from 'material-ui/Divider';
-import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import Card, { CardActions, CardContent, CardMedia, CardHeader } from 'material-ui/Card';
 import Button from 'material-ui/Button';
@@ -21,6 +20,9 @@ import ExpandLessIcon from 'material-ui-icons/ExpandLess';
 import { moreClicked } from '../App/AppActions';
 
 //Create StyleSheets
+import { createStyleSheet, createStyleManager } from 'jss-theme-reactor';;
+import { create as createJss } from 'jss';
+import preset from 'jss-preset-default';
 
 const styleSheet = createStyleSheet('SimpleMediaCard', () => ({
   wideCard: {
@@ -65,7 +67,6 @@ const gridStyleSheet = createStyleSheet('FullWidthGrid', (theme) => ({
   paper: {
     padding: 16,
     textAlign: 'center',
-    color: theme.palette.text.secondary,
   },
   cardHeader: {
     padding: '5px 16px 0px 16px',
@@ -92,8 +93,10 @@ export class Results extends Component {
   constructor(props, context) {
     super(props);
     this.render = this.render.bind(this);
-    this.styleManager = context.styleManager;
-
+    this.styleManager = createStyleManager({
+        jss: createJss(preset()),
+        theme: props.theme,
+      });
   }
 
   HandleMoreClicked(id) {
@@ -143,7 +146,7 @@ Results.propTypes = {
 };
 
 Results.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
+  //styleManager: customPropTypes.muiRequired,
 };
 
 // Retrieve data from store as props

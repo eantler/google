@@ -4,7 +4,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import { tagWeightChange } from '../../AppActions';
-import { createStyleSheet } from 'jss-theme-reactor';
 import TextField from 'material-ui/TextField';
 import List, {
   ListItem,
@@ -15,6 +14,10 @@ import List, {
 } from 'material-ui/List';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 
+//Styles
+import { createStyleSheet, createStyleManager } from 'jss-theme-reactor';;
+import { create as createJss } from 'jss';
+import preset from 'jss-preset-default';
 
 
 // Styles
@@ -30,7 +33,11 @@ export class DialogTagsWeight extends Component {
 
 constructor (props,context) {
     super(props);
-    this.styleManager = context.styleManager;
+    this.styleManager = createStyleManager({
+        jss: createJss(preset()),
+        theme: props.theme,
+      });
+
     this.state = {
         id: props.id,
         label: props.label,
@@ -80,9 +87,6 @@ DialogTagsWeight.propTypes = {
       value: PropTypes.string.isRequired,
 };
 
-DialogTagsWeight.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};
 
 function mapStateToProps(store) {
   return {

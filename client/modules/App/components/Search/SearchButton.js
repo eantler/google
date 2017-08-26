@@ -2,12 +2,18 @@
 
 import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
-import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import { toggleAdvancedDialog } from '../../AppActions';
+
+//Styles
+import { createStyleSheet, createStyleManager } from 'jss-theme-reactor';;
+import { create as createJss } from 'jss';
+import preset from 'jss-preset-default';
+
+
 const gridStyleSheet = createStyleSheet('CenteredGrid', (theme) => ({
   root: {
     flexGrow: 1,
@@ -15,20 +21,20 @@ const gridStyleSheet = createStyleSheet('CenteredGrid', (theme) => ({
   paper: {
     textAlign: 'center',
     alignItems: 'center',
-    color: theme.palette.text.secondary,
+    color: 'black',
   },
 }));
 
 const styleSheet = createStyleSheet('RaisedButtons', (theme) => ({
   raisedButton: {
-    margin: theme.spacing.unit,
+    margin: '2px',
     color: 'rgb(255, 255, 255)',
     alignSelf: 'center',
     display: 'inline-block',
 
   },
   button: {
-    margin: theme.spacing.unit,
+    margin: '2px',
     alignSelf: 'center',
     display: 'inline-block',
   },
@@ -38,7 +44,11 @@ export class RaisedButtons extends Component {
 
   constructor(props,context) {
     super(props);
-    this.styleManager = context.styleManager;
+    this.styleManager = createStyleManager({
+        jss: createJss(preset()),
+        theme: props.theme,
+      });
+
   }
 
   render() {
@@ -61,7 +71,7 @@ RaisedButtons.propTypes = {
   showLoader: PropTypes.bool.isRequired,
 }
 RaisedButtons.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
+  //styleManager: customPropTypes.muiRequired,
 };
 
 export default connect()(RaisedButtons);

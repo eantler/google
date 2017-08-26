@@ -2,7 +2,6 @@
 
 import React, { PropTypes } from 'react';
 import connect from 'react-redux';
-import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -11,6 +10,11 @@ import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import ToysIcon from 'material-ui-icons/Toys';
 import { makeLoginWithGoogle } from '../../AppActions';
+
+//Create StyleSheets
+import { createStyleSheet, createStyleManager } from 'jss-theme-reactor';;
+import { create as createJss } from 'jss';
+import preset from 'jss-preset-default';
 
 const styleSheet = createStyleSheet('ButtonAppBar', () => ({
   root: {
@@ -34,7 +38,14 @@ const styleSheet = createStyleSheet('ButtonAppBar', () => ({
 
 
 export default function ButtonAppBar(props, context) {
-  const classes = context.styleManager.render(styleSheet);
+  const styleManager = createStyleManager({
+      jss: createJss(preset()),
+      theme: props.theme,
+    });
+
+
+  const classes = styleManager.render(styleSheet);
+
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar}>
@@ -59,9 +70,9 @@ function mapStateToProps(store) {
   };
 }
 
-ButtonAppBar.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};
+// ButtonAppBar.contextTypes = {
+//   //styleManager: customPropTypes.muiRequired,
+// };
 
 ButtonAppBar.propTypes = {
   user: PropTypes.object,

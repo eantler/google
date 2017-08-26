@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 
 // Import Style
 import styles from './App.css';
-import { createStyleSheet } from 'jss-theme-reactor';;
+import { createStyleSheet, createStyleManager } from 'jss-theme-reactor';;
+import { create as createJss } from 'jss';
+import preset from 'jss-preset-default';
 
 // Import Components
 import Helmet from 'react-helmet';
@@ -49,7 +51,11 @@ export class App extends Component {
     this.state = { isMounted: false,
                    isAuthenticated: false,
                    user: undefined};
-    this.styleManager = context.styleManager;
+
+    this.styleManager = createStyleManager({
+        jss: createJss(preset()),
+        theme: props.theme,
+      });
 
   }
 
@@ -88,7 +94,7 @@ export class App extends Component {
           />
           <ImageDialog/>
           <ButtonAppBar isAuthenticated={this.props.isAuthenticated} user={this.props.user} dispatch={this.props.dispatch}/>
-          <Grid container className={classes.root} justify='center' gutter={24}>
+          <Grid container className={classes.root} justify='center'>
             <Grid item xs={10}>
               <Search />
             </Grid>
@@ -100,9 +106,9 @@ export class App extends Component {
   }
 }
 
-App.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};
+// App.contextTypes = {
+//   //styleManager: customPropTypes.muiRequired,
+// };
 
 App.propTypes = {
   children: PropTypes.object.isRequired,

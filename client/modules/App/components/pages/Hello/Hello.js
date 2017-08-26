@@ -72,8 +72,8 @@ export class FullWidthLayout extends Component {
   );
 }}
 
-FullWidthLayout.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};
+// FullWidthLayout.contextTypes = {
+//   //styleManager: customPropTypes.muiRequired,
+// };
 
 export default connect()(FullWidthLayout);

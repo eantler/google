@@ -2,7 +2,6 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import Paper from 'material-ui/Paper';
 import SearchInput from './SearchInput';
@@ -14,6 +13,12 @@ import SearchDialog from './SearchDialog';
 import Grid from 'material-ui/Grid';
 import _ from 'lodash';
 
+//Styles
+import { createStyleSheet, createStyleManager } from 'jss-theme-reactor';;
+import { create as createJss } from 'jss';
+import preset from 'jss-preset-default';
+
+
 const gridStyleSheet = createStyleSheet('CenteredGrid', (theme) => ({
   root: {
     flexGrow: 1,
@@ -23,7 +28,7 @@ const gridStyleSheet = createStyleSheet('CenteredGrid', (theme) => ({
   paper: {
     padding: 16,
     textAlign: 'center',
-    color: theme.palette.text.secondary,
+    color: 'black',
   },
   buttonContainer: {
     flexBasis: 'auto',
@@ -33,20 +38,21 @@ const gridStyleSheet = createStyleSheet('CenteredGrid', (theme) => ({
 }));
 
 const styleSheet = createStyleSheet('PaperSheet', (theme) => ({
-  root: theme.mixins.gutters({
-    paddingTop: 50,
+  root: {
+    paddingTop: 0,
     paddingBottom: 16,
     background: '#FFFFFF',
-    textAlign: 'center',
+    textAlign: 'left',
     display: 'flex',
     justifyContent: 'center',
     //flexWrap: 'nowrap',
     alignItems: 'center',
-  }),
+  },
     progress: {
-    margin: `0 ${theme.spacing.unit * 2}px`,
+    margin: '5px',
   },
 }));
+
 function handleChange(chips) {
     alert(JSON.stringify(chips));
 }
@@ -60,7 +66,13 @@ export class Search extends Component {
                       tags: [],
                       inputText: '',
                       };
-      this.styleManager = context.styleManager;
+      this.styleManager = createStyleManager({
+          jss: createJss(preset()),
+          theme: props.theme,
+        });
+
+
+
       this.HandleEnterClick = this.HandleEnterClick.bind(this);
       this.performAddTag = performAddTag.bind(this);
       this.performRemovetag = performRemovetag.bind(this);
@@ -127,7 +139,7 @@ function mapStateToProps(store) {
   }
 
 Search.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
+  //styleManager: customPropTypes.muiRequired,
 };
 
 export default connect(mapStateToProps)(Search);

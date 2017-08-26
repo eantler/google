@@ -2,14 +2,18 @@
 
 import React, { Component,PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import Chip from 'material-ui/Chip';
 import Typography from 'material-ui/Typography';
 
+//Styles
+import { createStyleSheet, createStyleManager } from 'jss-theme-reactor';;
+import { create as createJss } from 'jss';
+import preset from 'jss-preset-default';
+
 const styleSheet = createStyleSheet('ChipsArray', (theme) => ({
   chip: {
-    margin: theme.spacing.unit / 2,
+    margin: '2px',
   },
   row: {
     display: 'flex',
@@ -36,7 +40,11 @@ export class Chips extends Component {
       tags: props.tags,
     }
 
-    this.styleManager = context.styleManager;
+    this.styleManager = createStyleManager({
+        jss: createJss(preset()),
+        theme: props.theme,
+      });
+
     this.handleRequestDelete = this.handleRequestDelete.bind(this);
 
   }
@@ -69,7 +77,7 @@ export class Chips extends Component {
           key={data.key}
           onRequestDelete={() => this.handleRequestDelete(data.key)}
           className={classes.chip}
-      
+
         />
       );
     };
@@ -93,7 +101,7 @@ export class Chips extends Component {
 
 }
 Chips.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
+  //styleManager: customPropTypes.muiRequired,
 };
 Chips.propTypes = {
   //tags: PropTypes.array.isRequired

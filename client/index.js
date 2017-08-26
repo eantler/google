@@ -16,7 +16,7 @@ import createStyleManager from '../config/palette';
 // Initialize store
 const store = configureStore(window.__INITIAL_STATE__);
 const mountApp = document.getElementById('root');
-const { styleManager, theme } = createStyleManager();
+const theme = createStyleManager();
 
 const jssStyles = document.getElementById('jss-server-side');
     if (jssStyles && jssStyles.parentNode) {
@@ -24,7 +24,7 @@ const jssStyles = document.getElementById('jss-server-side');
     }
 
 render(
-  <MuiThemeProvider styleManager={styleManager} theme={theme}>
+  <MuiThemeProvider styleManager={theme} theme={theme} sheetsManager={new Map()}>
     <AppContainer>
       <App store={store} />
     </AppContainer>
@@ -39,7 +39,7 @@ if (module.hot) {
     // use <App /> here rather than require() a <NextApp />.
     const NextApp = require('./App').default; // eslint-disable-line global-require
     render(
-      <MuiThemeProvider styleManager={styleManager} theme={theme}>
+      <MuiThemeProvider styleManager={theme} sheetsManager={new Map()} theme={theme}>
         <AppContainer>
           <NextApp store={store} />
         </AppContainer>

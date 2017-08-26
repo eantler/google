@@ -1,17 +1,23 @@
 // @flow weak
 
 import React, { Component, PropTypes } from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import Input from 'material-ui/Input';
 import InputLabel from 'material-ui/Input/InputLabel';
 import FormControl from 'material-ui/Form/FormControl';
 
+//Styles
+import { createStyleSheet, createStyleManager } from 'jss-theme-reactor';;
+import { create as createJss } from 'jss';
+import preset from 'jss-preset-default';
+
+
 const styleSheet = createStyleSheet('ComposedTextField', () => ({
   container: {
-    width: '50%',
+    width: '100%',
   },
   input: {
+    width: '100%',
     margin: 10,
     textAlign:'center',
   },
@@ -30,11 +36,13 @@ export default class SearchInput extends Component {
       onEnter: props.onEnter,
     }
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.styleManager = createStyleManager({
+        jss: createJss(preset()),
+        theme: props.theme,
+      });
+
   }
 
-  static contextTypes = {
-    styleManager: customPropTypes.muiRequired,
-  };
   static propTypes = {
     text: PropTypes.string,
     onEnter: PropTypes.func,
@@ -54,7 +62,7 @@ export default class SearchInput extends Component {
 
  }
   render() {
-    const classes = this.context.styleManager.render(styleSheet);
+    const classes = this.styleManager.render(styleSheet);
 
     return (
 
