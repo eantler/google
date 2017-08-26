@@ -111,7 +111,7 @@ export class Results extends Component {
 
     return (
       <div className={gridClasses.root}>
-        <Grid container gutter={40} justify='center'>
+        <Grid container justify='center'>
           {
             this.props.results.map((item,i) => {
               return (

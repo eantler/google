@@ -104,7 +104,7 @@ export class Search extends Component {
     return (
       <div className={gridClasses.root}>
         <SearchDialog/>
-         <Grid container direction='row' justify='center' align='center' gutter={8}>
+         <Grid container direction='row' justify='center' align='center'>
             <Grid item xs={8}>
                 <SearchInput text={this.state.inputText} onEnter={this.HandleEnterClick} chips={<Chips tags={this.props.tags} onDelete={this.HandleDelete}/>}/>
             </Grid>
