@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import customPropTypes from 'material-ui/utils/customPropTypes';
+
 import { tagWeightChange } from '../../AppActions';
 import TextField from 'material-ui/TextField';
 import List, {

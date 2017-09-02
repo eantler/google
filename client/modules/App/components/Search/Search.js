@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import customPropTypes from 'material-ui/utils/customPropTypes';
+
 import Paper from 'material-ui/Paper';
 import SearchInput from './SearchInput';
 import Chips from './Chips';

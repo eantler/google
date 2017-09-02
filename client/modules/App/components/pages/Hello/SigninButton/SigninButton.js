@@ -2,7 +2,7 @@
 
 import React, { PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
-import customPropTypes from 'material-ui/utils/customPropTypes';
+
 import Button from 'material-ui/Button';
 import Icon from 'material-ui/Icon';
 import { makeLoginWithGoogle } from '../../../../AppActions';
