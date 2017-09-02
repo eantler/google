@@ -9,7 +9,6 @@ import preset from 'jss-preset-default';
 
 // Import Components
 import Helmet from 'react-helmet';
-import customPropTypes from 'material-ui/utils/customPropTypes';
 import DevTools from './components/DevTools';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
