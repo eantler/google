@@ -3,7 +3,7 @@
 import React ,{ PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { createStyleSheet } from 'jss-theme-reactor';
-import customPropTypes from 'material-ui/utils/customPropTypes';
+
 import Paper from 'material-ui/Paper';
 import Layout from 'material-ui/Layout';
 import Text from 'material-ui/Text';

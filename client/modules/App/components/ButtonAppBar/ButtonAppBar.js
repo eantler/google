@@ -2,7 +2,7 @@
 
 import React, { PropTypes } from 'react';
 import connect from 'react-redux';
-import customPropTypes from 'material-ui/utils/customPropTypes';
+
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Text from 'material-ui/Typography';

@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import customPropTypes from 'material-ui/utils/customPropTypes';
+
 import Button from 'material-ui/Button';
 import Dialog, {
   DialogActions,

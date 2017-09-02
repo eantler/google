@@ -6,7 +6,7 @@ import _ from 'lodash';
 import ClusterItem from './components/ClusterItem/ClusterItem'
 import Typography from 'material-ui/Typography';
 import Divider from 'material-ui/Divider';
-import customPropTypes from 'material-ui/utils/customPropTypes';
+
 import Card, { CardActions, CardContent, CardMedia, CardHeader } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
