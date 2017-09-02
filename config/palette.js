@@ -7,11 +7,11 @@ import { createMuiTheme } from 'material-ui/styles';
 export default function() {
   return createMuiTheme({
 
-      palette: createPalette({
-
-          primary: lightBlue,
-          accent: pink,
-          type: 'light',
-      }),
+      // palette: createPalette({
+      // 
+      //     primary: lightBlue,
+      //     accent: pink,
+      //     type: 'light',
+      // }),
     });
 }
